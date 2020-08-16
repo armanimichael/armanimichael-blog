@@ -1,0 +1,23 @@
+[
+  {
+    "name": "React",
+    "description": "React is a JavaScript library for building interactive user interfaces, developed and mantained by Facebook.",
+    "color": "#61dafb",
+    "background": "#282c34",
+    "icon": ""
+  },
+  {
+    "name": "JavaScript",
+    "description": "JavaScript is a client-side programming language commonly used in web development, that conforms to the ECMAScript specification.",
+    "color": "#333331",
+    "background": "#f1db52",
+    "icon": ""
+  },
+  {
+    "name": "TypeScript",
+    "description": "TypeScript is a superset of JavaScript developed by Microsoft that adds static typing, classes, interfaces, generics, etc..",
+    "color": "white",
+    "background": "#294e80",
+    "icon": ""
+  }
+]

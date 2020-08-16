@@ -1,0 +1,30 @@
+[
+  {
+    "link": "https://www.facebook.com/",
+    "image": "facebook"
+  },
+  {
+    "link": "https://twitter.com/",
+    "image": "twitter"
+  },
+  {
+    "link": "https://www.linkedin.com/",
+    "image": "linkedin"
+  },
+  {
+    "link": "https://www.instagram.com/",
+    "image": "instagram"
+  },
+  {
+    "link": "https://www.tumblr.com/",
+    "image": "tumblr"
+  },
+  {
+    "link": "https://www.youtube.com/",
+    "image": "youtube"
+  },
+  {
+    "link": "https://www.pinterest.com/",
+    "image": "pinterest"
+  }
+]
