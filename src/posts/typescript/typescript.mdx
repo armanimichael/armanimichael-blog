@@ -1,0 +1,107 @@
+---
+title: What's TypeScript
+crawlerTitle: What's TypeScript and why should you care?
+description: TypeScript is a superset of JavaScript developed by Microsoft that adds static typing, classes, interfaces, generics, etc..
+keywords: TypeScript, JavaScript
+excerpt: What's TypeScript and why should you care?
+slug: /whats-typescript/
+date: 2020-05-28
+category: TypeScript
+---
+
+## What's TypeScript
+
+TypeScript is a **superset** of [JavaScript](/category/javascript/) developed by Microsoft. To make it simple, it encapsulates JavaScript, providing the same syntax plus [static typing](/typescript-types/), **classes**, **interfaces, generics, etc.**.
+
+JavaScript code is also valid TypeScript code. Moving from JavaScript to TypeScript is as easy as editing your old projects.
+
+TypeScript is based on **ECMAScript 6** standards, and it's a complied and OOP oriented language.
+
+TypeScript's syntax is a mix of what already is in JavaScript, with the addition of a C#-like syntax.
+
+## Why using it?
+
+While JavaScript has been around since 1995, it's also known to lack many **modern language** capabilities.
+
+For instance, the ECMAScript standards are not supported on every browser. **TypeScript** compiles directly in JavaScript, using any target standard, making the final product compatible with every targeted browser.
+
+Another significant problem with JavaScript is its lack of data types.
+
+Don't get me wrong. JavaScript uses data types as any other language.
+
+However, you can't specify them, their self-assigned to variables depending on their value.
+
+The absence of data types leads us to **harder debugging** and **less developing tools support**.
+
+Let's take a look at this JavaScript code snippet, for example.
+
+```JavaScript
+function divide(a, b) {
+    return a / b;
+}
+```
+
+This function takes in two arguments and returns their quotient. But what happens if you pass in two strings? Or a number and a string? Or arrays?
+
+The **IDE wouldn't know there's something wrong**, we would notice only after execution.
+
+This is where TypeScript helps us.
+
+We can upgrade this snippet with TypeScript:
+
+```typescript
+function divide(a: number, b: number): number {
+  return a / b;
+}
+```
+
+We now know that this function accepts two numbers and returns a number. If we passed something else, your code editor (with TypeScript support) would tell us that it's not the right type.
+
+Between the many additions to TypeScript, we can also find improved OOP. For example, if you're familiar with languages such as [C#](/category/monogame/), C, Java, ..., you should know about **Accessibility Levels** when working with classes.
+
+For example, you can now make sure that nobody can't access certain class fields from outside the class.
+
+Trying to do it will throw an error.
+
+```typescript
+class Example {
+  imAccessible: string = 'fields are public by default';
+  private notAccessible: string =
+    'Accessing this from outside will cause an error';
+  protected kindOfNotAccessible: string = 'Only subclasses can access';
+}
+```
+
+Moreover, we can also declare **interfaces**. For example, if we want to pass a specific object to a function, we can do this:
+
+```typescript
+interface Person {
+  name: string;
+  lastname: string;
+}
+
+function greetPerson(person: Person): string {
+  return `Hello my name is ${person.name} ${person.lastname}`;
+}
+```
+
+It's also possible to reproduce the same with Types, I may talk about the difference in later posts.
+
+```typescript
+type Person = {
+  name: string;
+  lastname: string;
+};
+
+function greetPerson(person: Person): string {
+  return `Hello my name is ${person.name} ${person.lastname}`;
+}
+```
+
+## A starting point
+
+This post serves as a general overview of TypeScript.
+
+In later posts, I will talk more in detail about this language syntax and additions.
+
+The first thing I will cover will be [types](/typescript-types/).

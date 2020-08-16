@@ -1,13 +1,5 @@
 [
   {
-    "link": "https://www.facebook.com/",
-    "image": "facebook"
-  },
-  {
-    "link": "https://twitter.com/",
-    "image": "twitter"
-  },
-  {
     "link": "https://www.linkedin.com/",
     "image": "linkedin"
   },
@@ -20,11 +12,11 @@
     "image": "tumblr"
   },
   {
-    "link": "https://www.youtube.com/",
-    "image": "youtube"
+    "link": "https://www.pinterest.com/",
+    "image": "pinterest"
   },
   {
     "link": "https://www.pinterest.com/",
-    "image": "pinterest"
+    "image": "github"
   }
 ]

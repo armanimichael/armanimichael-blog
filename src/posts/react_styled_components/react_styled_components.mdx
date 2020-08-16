@@ -1,0 +1,186 @@
+---
+title: Styled Components in React
+crawlerTitle: Styled Components in React
+description: Styled Components allow you to write actual CSS inside your React project. Using template literals, full JSX support and more.
+keywords: React, Styled Components, CSS, React styling
+excerpt: Writing actual CSS in JavaScript with full React support.
+slug: /styled-components/
+date: 2020-01-23
+category: React
+---
+
+import StyledComponentsExampleButton from './../../example_components/StyledComponentsExampleButton.js';
+
+## What are Styled Components?
+
+**Styled Components** is an **NPM Package** built with the intent of easily styled [React components](/reactjs-components). They use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) to pass in CSS code into your components, **isolating each style from the others**.
+
+Moreover, **the package automatically manages classes** and **Vendor Prefixes**, so we don't have to worry about conflicts or naming conventions. Styled Components also support [SSR](/client-side-vs-server-side-rendering/).
+
+## Creating a component
+
+As you know, there are different components types in ReactJS. Let's see how to create a **Presentational Component**.
+
+A Presentational Component only concerns the graphical aspect of our component, it usually doesn't have a state, and only contains props.
+
+Therefore, our first Styled Component will be the bare minimum.
+
+For example, **let's create a button**.
+
+In contrast with a standard React component, **we don't need to import React**. Instead, we'll have to import `styled` from `styled-components`.
+
+We'll also have to **specify which HTML element the component represents**, in this case, a `button`.
+
+In the end, we can **pass the CSS code between the backticks** (ACSII Code 96).
+
+In case you want to use any pseudo-class, you can use the same syntax as CSS, but adding a `&` before the colon/s. You can see for example how I used `&:hover`.
+
+```jsx
+import styled from 'styled-components';
+
+const Button = styled.button`
+  background: transparent;
+  font-size: 36px;
+  border-radius: 3px;
+  border: 2px solid #d64541;
+  color: #d64541;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
+export default Button;
+```
+
+Styled Components handle the children prop by itself, if you do this:
+
+```jsx
+<Button>Button</Button>
+```
+
+The result will be this:
+
+<div style={{width: '100%', textAlign: 'center'}}>
+  <StyledComponentsExampleButton>Button</StyledComponentsExampleButton>
+</div>
+
+## Extending Styles
+
+Sometimes some components are almost identical, and you may only want to **override a few proprieties without creating redundancy**. You can achieve this thought the **styled Constructor**, as it follows:
+
+```jsx
+import styled from "styled-components";
+
+const Button = styled.button`
+  background: transparent;
+  font-size: 36px;
+  border-radius: 3px;
+  border: 2px solid #d64541;
+  color: #d64541;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
+const ExtendedButton = styled(Button)`
+  &:hover {
+    transform: scale(1.2) rotate(360deg);
+  }
+`;
+
+export { Button, ExtendedButton };
+```
+
+## Passing props
+
+One of the useful things about using Styled Components in React is **passing props**.
+
+In standard React, changing styles using props is inefficient and can create conflicts with CSS files. For instance, changing some styles of an element would look like this:
+
+```jsx
+import React from 'react';
+import './styles.css';
+
+const ExampleComponent = props => {
+  const customStyles = {
+    color: props.color,
+    fontSize: props.fontSize,
+    border: props.border
+    background: props.background
+  };
+  
+  return <h1 style={customStyles}>This looks terrible...</h1>  
+};
+
+export default ExampleComponent;
+```
+
+In this particular example, I used multiple props to demonstrate how confusing and messy the code can get using the standard syntax.
+
+While using Styled Components, we can solve this complexity by taking advantage of **string literals**.
+
+Inside of any Styled Component, **we can access props** and using them where we prefer. To accomplish that, we have to **pass in a function accepting props and returning the required one**.
+  
+Let's go back to our button, this is how we could change its color scheme:
+
+```jsx
+import styled from "styled-components";
+
+const Button = styled.button`
+  background: transparent;
+  font-size: 36px;
+  border-radius: 3px;
+  border: 2px solid ${ props => props.color || '#d64541' };
+  color: ${ props => props.color || '#d64541' };
+  margin: 0 1em;
+  padding: 0.25em 1em;
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
+export default Button;
+```
+
+To sum up, we're returning the value of props.color or a default value if not set. Obviously, considering we're passing a function, we could implement every kind of behavior without much effort.
+
+
+## Animations
+
+In CSS, we can create animations using `keyframes`.
+
+The same thing applies to Styled Component, we just have to **import** `keyframes`, and create an animation and reference it inside the Styled Component:
+
+```jsx
+import styled, { keyframes } from 'styled-components';
+
+const rotateAnim = keyframes`
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+`;
+
+const Component = styled.div`
+	...
+	animation: ${rotateAnim} 1s linear infinite;
+`
+```
+
+## This is not all
+
+Besides, Styled Components let us create **themes**, it supports [Server Side Rendering](/client-side-vs-server-side-rendering/), and they're easily expandable.
+
+If you want to know more, you could go check their [website out.](https://styled-components.com/)
+
+If you want to know more about React, you can find some of my articles about the subject [here](/category/react/).

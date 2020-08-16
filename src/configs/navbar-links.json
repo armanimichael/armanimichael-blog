@@ -1,18 +1,10 @@
 [
   {
-    "name": "home",
+    "name": "Home",
     "path": "/"
   },
   {
-    "name": "Test",
-    "path": "/using-typescript"
-  },
-  {
-    "name": "Blog",
-    "path": "/blog"
-  },
-  {
-    "name": "about",
+    "name": "About",
     "path": "/about/"
   }
 ]

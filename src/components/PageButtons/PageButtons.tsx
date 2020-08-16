@@ -17,22 +17,22 @@ const PageButtons: React.FC<Props> = ({
 }) => {
   const latestRedirect = () => {
     if (Number(pageNumber) === 1) {
-      return '/blog/';
+      return '/';
     }
 
-    return `/blog/page/${pageNumber - 1}`;
+    return `/page/${pageNumber - 1}`;
   };
 
   const previousRedirect = () => {
     if (pageNumber === 0) {
-      return '/blog/page/1';
+      return '/page/1';
     }
 
     if (Number(pageNumber) < Math.ceil(totalPages / 10) - 1) {
-      return `/blog/page/${Number(pageNumber) + 1}`;
+      return `/page/${Number(pageNumber) + 1}`;
     }
 
-    return '/blog/';
+    return '/';
   };
 
   return (

@@ -1,0 +1,86 @@
+---
+title: How to remove items from an Array in JavaScript
+crawlerTitle: JavaScript - How to remove items from an Array
+description: How to remove certain items from an Array in JavaScript, updating the length of the array automatically. Exploring different methods and approaches.
+keywords: JavaScript, Array, Remove items from array, Array methods
+excerpt: Efficient ways to remove items from Arrays.
+slug: /javascript-remove-items-array/
+date: 2020-01-14
+category: JavaScript
+---
+
+## Removing the last item
+
+To **remove the** **last item from an Array**, we can use the `pop()` method, which also _returns the removed item_.
+
+```javascript
+const langs = ['Ruby', 'C#', 'Python', 'JavaScript'];
+const removedItem = langs.pop();
+
+console.log(removedItem); // 'JavaScript'
+```
+
+## Removing the first item
+
+Similarly to the previous case, we can **remove an item from the beginning of the Array**. In this case, we can use the `shift()` method, which _returns the deleted item_.
+
+```javascript
+const langs = ['Ruby', 'C#', 'Python', 'JavaScript'];
+const removedItem = langs.shift();
+
+console.log(removedItem); // 'Ruby'
+```
+
+## Remove an/some item(s) by index
+
+If **you know where the item you want to delete is**, for example, if you’re cycling an Array with a for a loop, then you can use the `splice()` method, which _returns the removed item_.
+
+The first argument is the **starting index**, while the second indicates **how many items you want to remove starting from that index**.
+
+```javascript
+const langs = ['Ruby', 'C#', 'Python', 'JavaScript'];
+const removedItems = langs.splice(1, 2);
+
+console.log(removedItems); // ['C#', 'Python']
+```
+
+## Remove an item knowing its value
+
+When you want to **remove an item with a particular value** from an Array in JavaScript, you can use the `filter()` method.
+
+_Note that it doesn’t change the original Array!_
+
+This method **accepts a callback.** It is common to use the [Arrow Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).
+
+```javascript
+const langs = ['Ruby', 'C#', 'Python', 'JavaScript'];
+const filteredArray = langs.filter(item => item !== 'Python');
+
+console.log(langs); // ['Ruby', 'C#', 'Python', 'JavaScript']
+console.log(filteredArray); // ['Ruby', 'C#', 'JavaScript']
+```
+
+## Removing multiple items knowing their values
+
+Using the same syntax as above, we can remove multiple items from the Array. We can achieve that by using the `includes()` method, which **returns true if the passed argument is in the array**, false otherwise.
+
+```javascript
+const langs = ['Ruby', 'C#', 'Python', 'JavaScript'];
+const itemsToRemove = ['Ruby', 'JavaScript'];
+const filteredArray = langs.filter(item => !itemsToRemove.includes(item));
+
+console.log(langs); // ['Ruby', 'C#', 'Python', 'JavaScript']
+console.log(filteredArray); // ['C#', 'Python']
+```
+
+## More techniques
+
+In addition to these methods, there're other possible workarounds.
+
+For instance, it is possible to **remove items without changing the Array length**. This procedure uses the JavaScript operator `delete`, is sets the affected item to `undefined`, which is usually ideal.
+
+Despite **filter()** being more specific for our use case, the `map()` method may come handy, providing a more in-depth control over the Array. This method works best when, instead of removing items, you want to **edit** them.
+
+## Possible applications
+
+Arrays are really powerful to work with. Libraries like [ReactJS](/react-for-beginners/) use them widely, for example for [props and states](/reactjs-components/).

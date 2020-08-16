@@ -25,14 +25,13 @@ const BlogFeed: React.FC<Props> = ({
   },
 }) => {
   const pageNumber: number = +pathname.replace(/[^\d+$]/g, '');
-  console.log(pathname);
 
   return (
     <Layout>
       <PostsList edges={edges} />
       <PageButtons
         previous={pageNumber < Math.ceil(totalCount / MAX_PAGE_POSTS) - 1}
-        latest={pathname !== '/blog/' && pathname !== '/blog'}
+        latest={pathname !== '/'}
         pageNumber={pageNumber}
         totalPages={totalCount}
       />

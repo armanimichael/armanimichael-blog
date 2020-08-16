@@ -24,6 +24,8 @@ const SEO: React.FC<Props> = ({
 }) => {
   const siteMetadata = useSiteMetadata();
   const metaDescription: string = description || siteMetadata.description;
+  const socialImage =
+    siteMetadata.siteUrl + (image ? '/' + image : '/social_image.jpg');
 
   return (
     <Helmet
@@ -69,9 +71,7 @@ const SEO: React.FC<Props> = ({
         },
         {
           property: 'og:image',
-          content: image
-            ? image
-            : siteMetadata.siteUrl + '/default-social-image.png',
+          content: socialImage,
         },
         {
           property: 'og:site_name',
@@ -96,7 +96,7 @@ const SEO: React.FC<Props> = ({
         },
         {
           name: 'twitter:image',
-          content: image,
+          content: socialImage,
         },
       ].concat(meta)}
     />

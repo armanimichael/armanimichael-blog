@@ -45,9 +45,7 @@ const PostPreview: React.FC<Props> = ({
       <Category
         color={categoryData ? categoryData.color : 'black'}
         background={categoryData ? categoryData.background : 'white'}
-        to={
-          '/blog/category/' + category.toLowerCase().replace(/ /g, '-').trim()
-        }
+        to={'/category/' + category.toLowerCase().replace(/ /g, '-').trim()}
       >
         {category}
       </Category>

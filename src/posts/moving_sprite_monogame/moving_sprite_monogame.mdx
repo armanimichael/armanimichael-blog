@@ -1,0 +1,352 @@
+---
+title: Moving a Sprite in MonoGame
+crawlerTitle: Moving a Sprite in MonoGame
+description: How to move a sprite in MonoGame, getting inputs from the keyboard. Creating a Player and a Sprite class to easily handle changes.
+keywords: MonoGame, Game Dev, Game Framework, user inputs
+excerpt: How to move a Sprite from user's inputs.
+slug: /monogame-move-sprite/
+date: 2019-11-09
+category: MonoGame
+---
+
+## Let's continue where we left off
+
+[In the last post](http:///monogame-move-sprite/), I talked about setting up a **MonoGame** Project. Thus, we now have a sprite displayed on the screen.
+
+Let's see how to add some **interactivity** to the scene, adding some motion through the **player's inputs**.
+
+## More files = Less confusion
+
+Placing all of the game logic inside `Game1.cs` could work, this strategy, however, would make the project almost impossible to track.
+
+**C#** **is an** **object-oriented** language. Let's take advantage of classes.
+
+For this tutorial purpose, we'll need to implement two classes:
+
+- The `Sprite` class: containing some of the code we already wrote in the last article, plus some improvements.
+- The `Player` class: inheriting from `Sprite` and handling properties such as inputs and stats.
+
+## The Sprite Class
+
+To begin with, we’re going to create the Sprite class, let’s create a new file named Sprite.cs.
+
+Essentially, we need to keep track of **3 pieces of information**:
+
+- The texture source: `_textureSrc`.
+- The actual texture: `_texture`.
+- The position of the texture: `_pos`.
+
+Don't forget to import the required **Namespaces**.
+
+```csharp
+// Required Namespaces
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace BlogTutorial
+{
+    public class Sprite
+    {
+        // The protected keywords make the variables
+        // only accessible from children classes
+        protected Texture2D _texture;
+        protected string _textureSrc;
+
+        // The default position is set the top left
+        // part of the screen
+        protected Vector2 _pos = new Vector2(0, 0);
+
+...
+```
+
+We may want to create a public Property for the `_pos` field. This way, we can set the sprite’s position from outside the class.
+
+```csharp
+...
+
+public Vector2 Position
+{
+    get { return _pos; }
+    set { _pos = value; }
+}
+
+...
+```
+
+At this point, we can create the **Constructor** and initialize `_textureSrc` there.
+
+```csharp
+...
+
+public Sprite(string textureSrc)
+{
+    this._textureSrc = textureSrc;
+}
+
+...
+```
+
+And after that, the LoadContent and Draw methods.
+
+```csharp
+// We're passing a ContentManager obj in order to
+// load the resources we need
+public virtual void LoadContent(ContentManager content)
+{
+    _texture = content.Load<Texture2D>(_textureSrc);
+}
+
+// This is going to be implemented into any Interactive children
+// class such as Player
+public virtual void Update(GameTime gt) { }
+
+// We're passing a SpriteBatch obj in order to
+// draw the texture previously loaded in
+public virtual void Draw(SpriteBatch sb)
+{
+    sb.Draw(
+       _texture,
+       _pos,
+       Color.White
+    );
+}
+```
+
+### The whole thing - without comments
+
+```csharp
+// Required Namespaces
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace BlogTutorial
+{
+    public class Sprite
+    {
+        protected Texture2D _texture;
+        protected string _textureSrc;
+        protected Vector2 _pos = new Vector2(0, 0);
+
+        public Vector2 Position
+        {
+            get { return _pos; }
+            set { _pos = value; }
+        }
+
+        public Sprite(string textureSrc)
+        {
+            this._textureSrc = textureSrc;
+        }
+
+        public virtual void LoadContent(ContentManager content)
+        {
+            _texture = content.Load<Texture2D>(_textureSrc);
+        }
+
+        public virtual void Update(GameTime gt) { }
+
+        public virtual void Draw(SpriteBatch sb)
+        {
+            sb.Draw(
+            _texture,
+            _pos,
+            Color.White
+            );
+        }
+    }
+}
+```
+
+## The Player Class
+
+This is where you'll learn **how to move a sprite in MonoGame**.
+
+Therefore, let's create a `Player.cs` file. Differently from the `Sprite`, `Player` requires two additional fields:
+
+- Velocity: a Vector describing the player's movements: `_velocity`.
+- Speed: the movement speed: `_speed`.
+
+```csharp
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+
+namespace BlogTutorial
+{
+    // Inheriting from Sprite
+    class Player : Sprite
+    {
+        // Creating and initializing two new fields
+        // to a default value
+        private Vector2 _velocity = new Vector2(0, 0);
+        private float _speed = 4;
+
+...
+```
+
+For now, we don't need a specific **Constructor** so we're just using the **inherited** one.
+
+```csharp
+// Using the same Constructor as Sprite
+public Player(string textureSrc) : base(textureSrc)
+{ }
+```
+
+Let’s implement a Player's specific `Update` method.
+
+```csharp
+// Overriding the Update Method
+public override void Update(GameTime gt)
+{
+   // Get current Keyboard State
+   KeyboardState kstate = Keyboard.GetState();
+
+   // Moving Up
+   if (kstate.IsKeyDown(Keys.Up))
+   {
+       _velocity.Y = -_speed;
+   }
+   // Or Moving Down
+   else if (kstate.IsKeyDown(Keys.Down))
+   {
+       _velocity.Y = _speed;
+   }
+
+   // Moving Left
+   if (kstate.IsKeyDown(Keys.Left))
+   {
+       _velocity.X = -_speed;
+   }
+   // Or Moving Right
+   else if (kstate.IsKeyDown(Keys.Right))
+   {
+      _velocity.X = _speed;
+   }
+
+   // Update position
+   _pos += _velocity;
+
+   // Stop the player when not pressing any key
+   _velocity = Vector2.Zero;
+}
+```
+
+### The whole thing - without comments
+
+```csharp
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+
+namespace BlogTutorial
+{
+    class Player : Sprite
+    {
+        private Vector2 _velocity = new Vector2(0, 0);
+        private float _speed = 4;
+
+        public Player(string textureSrc) : base(textureSrc)
+        { }
+
+        public override void Update(GameTime gt)
+        {
+            KeyboardState kstate = Keyboard.GetState();
+            if (kstate.IsKeyDown(Keys.Up))
+            {
+                _velocity.Y = -_speed;
+            }
+            else if (kstate.IsKeyDown(Keys.Down))
+            {
+                _velocity.Y = _speed;
+            }
+
+            if (kstate.IsKeyDown(Keys.Left))
+            {
+                _velocity.X = -_speed;
+            }
+            else if (kstate.IsKeyDown(Keys.Right))
+            {
+                _velocity.X = _speed;
+            }
+
+            _pos += _velocity;
+            _velocity = Vector2.Zero;
+        }
+    }
+}
+```
+
+## Implementing the Player
+
+Taking advantage of the code we wrote before, we can finally implement the `Player` in the scene by adding everything inside `Game1.cs`.
+
+```csharp
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+namespace BlogTutorial
+{
+    public class Game1 : Game
+    {
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+
+        Player _player;
+
+        public Game1()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+        }
+
+        protected override void Initialize()
+        {
+            // Initializing the Player
+            // Specifying the texture src
+            _player = new Player("random_player");
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // Loading the Player's texture
+            _player.LoadContent(Content);
+        }
+
+        protected override void UnloadContent()
+        {
+            // TODO: Unload any non ContentManager content here
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            // Updating the Player's Position
+            _player.Update(gameTime);
+
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            spriteBatch.Begin();
+
+            // Drawing the Player
+            _player.Draw(spriteBatch);
+
+            spriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+    }
+}
+```
+
+## Conclusion
+
+With a movable player on the scene, we could proceed by adding some enemies, objectives, and collision detection. I'll probably write something about it in the next posts.

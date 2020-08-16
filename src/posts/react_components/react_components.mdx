@@ -1,0 +1,220 @@
+---
+title: React Components
+crawlerTitle: React - How to create components
+description: Learn how to create Components in ReactJS. Learn the difference between Functional and Class Components, and how to use props and states.
+keywords: React, React Component, React Components, State, Props
+excerpt: Learn about React Components, states, and props.
+slug: /reactjs-components/
+date: 2020-01-04
+category: React
+---
+
+import StatesExample from './../../example_components/StatesExample.js';
+
+## What are Components?
+
+Why is [React](/react-for-beginners/) so **powerful** and **efficient**? One of the key features is probably **code splitting and reusability**.
+
+React lets you define components, pieces of code you can reuse throughout your program.
+
+Since the introduction of **React 16.8**, we can categorize components as **Class Components** and **Functional Components**.
+
+_Components must be always_ **_capitalized_** _to avoid conflicts with existing HTML elements._
+
+## Class Components
+
+Before React 16.8, this was the most used way to create Components. They were the only type able to implement **states**, which I will talk about in a second.
+
+Let's dive into the **syntax.** To create an essential component, we could write something like this.
+
+```jsx
+/*
+ Don't forget to import React! It allows the use of JSX syntax.
+ For simplicity, we're deconstructing Components from React, its parent class
+*/
+import React, { Component } from 'react';
+// Inheriting from Component, and exporting
+export default class FistComponent extends Component {
+  render() {
+      return <h1>Cool Component<h1>;
+  }
+}
+```
+
+## Functional Components
+
+Functional Components grew in popularity with React 16.8, they need **less code** and **can access state** effortlessly. They use any JavaScript function notation, usually the **arrow function**.
+
+This is how we can define one (same as the example before).
+
+```jsx
+import React from 'react';
+
+export default = () => <h1>Cool Component</h1>;
+```
+
+## Props
+
+For now, this example does nothing. We could make this component **reusable and variable**. This aspect of components concerns properties, or for short, **props**.
+
+React uses props to **pass information** from a parent component to its children. You **can't change their value** from the component. If you need dynamic data, use states!
+
+**Props can consist of several data types**. They coincide with common variable data types, plus JSX and HTML elements.
+
+For instance, we could add a variable title to the previous component.
+
+```jsx
+// Class Component
+import React, { Component } from 'react';
+
+class FistComponent extends Component {
+  render() {
+      const { title } = this.props;
+      return <h1>{ title }<h1>;
+  }
+}
+```
+
+```jsx
+// Functional Component
+import React from 'react';
+
+export default = props => <h1>{ props.title }</h1>;
+```
+
+This is what it looks like when we actually pass it.
+
+```jsx
+<FirstComponent title="Using props" />
+```
+
+### The children prop
+
+React has a special prop called `children`. It contains all elements passed between the opening and closing tags of the component.
+
+```jsx
+<FirstComponent>
+  <h1>Children</h1>
+  <p>
+    Cupidatat velit exercitation incididunt laboris quis consequat irure esse
+    anim mollit nulla dolore veniam. Do proident irure veniam cillum sint est
+    nulla do commodo excepteur non. Non culpa mollit irure labore consequat
+    enim. Nisi mollit laborum tempor culpa voluptate exercitation.
+  </p>
+</FirstComponent>
+```
+
+In this case, `children` is a node containing a `h1` and a `p` element.
+
+## States
+
+When a React component needs to **keep track of** any piece of **changing information**, you can use **states**.
+
+While props are defined only once, **states can change over time**. We can use them to handle events, data, and behaviors.
+
+Furthermore, if we want to initialize a state to a default, we can take it directly from props.
+
+Defining a state inside a Class Component (expanding the example before).
+
+```jsx
+// Class Component
+import React, { Component } from 'react';
+
+class FistComponent extends Component {
+  // Initialing the state
+  constructor(props) {
+    super(props);
+
+    // State is an object
+    // The initial value will be the passed value of the title prop
+    this.state = {
+      title: props.title
+    };
+  }
+
+  render() {
+      // Let's use the state instead
+      const { title } = this.state;
+      return <h1>{ title }<h1>;
+  }
+}
+```
+
+For Functional Components, we need to use **hooks**, importing `useState` from React. The syntax looks a bit different.
+
+We need to create a new **array**. The first value is the **state value**, while the second is a **method** we'll use **to change the state value**.
+
+```jsx
+// Functional Component
+import React, { useState } from 'react';
+
+export default = props => {
+  // Defining the state and using the prop's value as a default
+  const [ title, setTitle ] = useState(props.title);
+
+  return <h1>{ title }</h1>
+};
+```
+
+## Updating a state
+
+Now we have a state, what about updating it?
+
+Class Components and Functional Components have their unique syntaxes.
+
+For example, we could **change the title when** **clicking** the component. In this case, we can use the onClick event.
+
+Let's start with **Class Components**.
+
+```jsx
+import React, { Component } from 'react';
+
+class FistComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      title: props.title
+    };
+  }
+
+  // Helper function
+  handleClick = () => {
+    // Updating the state, use the same name as the actual state
+    this.setState({
+      title: 'New Title'
+    });
+  }
+
+  render() {
+      const { title } = this.state;
+
+      // onClick event
+      return <h1 onClick={handleClick}>{ title }<h1>;
+  }
+}
+```
+
+The syntax for **Functional Components** is simpler.
+
+```jsx
+import React, { useState } from 'react';
+
+export default () => {
+  const [title, setTitle] = useState('Cool component!');
+
+  return <h2 onClick={() => setTitle('New Title!')}>{title}</h2>;
+};
+```
+
+This is what it looks like. Try to click the title underneath.
+
+<StatesExample />
+
+## Conclusion
+
+React is a modern and versatile UI library, understanding how components work is fundamental.
+
+The syntax evolved between versions. For instance, **Functional Components** require fewer lines to create. On the other hand, **Class components** have a well-defined syntax, familiar with people with OOP backgrounds.
+
+For the moment, differences between the two are barely notable. You can stick with the one you prefer.

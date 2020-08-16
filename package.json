@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-mike",
+  "name": "armanimichael-blog",
   "private": true,
-  "description": "Gatsby Starter with TypeScript support - js-styling with styled-components.",
+  "description": "Armani Michael's Blog",
   "version": "0.1.0",
   "author": "Michael Armani",
   "dependencies": {
@@ -67,10 +67,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/armanimichael/gatsby-starter-mike/"
+    "url": "https://github.com/armanimichael/armanimichael-blog"
   },
   "bugs": {
-    "url": "https://github.com/armanimichael/gatsby-starter-mike/issues"
+    "url": "https://github.com/armanimichael/armanimichael-blogissues"
   },
   "resolutions": {
     "**/**/dot-prop": "5.2.0"

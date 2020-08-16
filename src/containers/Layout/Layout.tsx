@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
+// import { Link } from 'gatsby';
 import { DefaultTheme } from 'styled-components';
 import { ThemeProvider } from 'styled-components';
-import CookieConsent from 'react-cookie-consent';
-
-import HeroContent from './HeroContent';
+// import CookieConsent from 'react-cookie-consent';
 
 import '../../themes/index.css';
 import GlobalStyle from '../../themes/global-style';
@@ -13,27 +11,20 @@ import { useTheme } from '../../hooks/useTheme';
 
 import { Navbar, Footer, ThemeModal, BackToTop, SEO } from '../../components';
 
-import logoImg from '../../images/gatsby.png';
+import logoImg from '../../images/logo.png';
 
 import themes from '../../themes/themes';
 
 interface Props {
-  showHero?: boolean;
   noScriptMsg?: string;
   SEOComponent?: React.ReactElement;
   allowPadding?: boolean;
 }
 
-const defaultProps = {
-  showHero: false,
-  mainFlex: 4,
-};
-
 const isWebsiteThemed = (): boolean => Object.keys(themes).length > 1;
 
 const Layout: React.FC<Props> = ({
   children,
-  showHero = defaultProps.showHero,
   noScriptMsg = 'JavaScript is disabled, theme changing and other functionalities may not work.',
   SEOComponent,
   allowPadding = true,
@@ -49,7 +40,7 @@ const Layout: React.FC<Props> = ({
       {SEOComponent || <SEO />}
       <GlobalStyle />
       <BackToTop />
-      <CookieConsent
+      {/* <CookieConsent
         enableDeclineButton
         location="bottom"
         buttonText="Accept"
@@ -59,7 +50,7 @@ const Layout: React.FC<Props> = ({
       >
         This site uses cookies... {` `}
         <Link to="/privacy/">Read more about privacy.</Link>
-      </CookieConsent>
+      </CookieConsent> */}
       <header>
         {showThemeModal && (
           <ThemeModal
@@ -79,12 +70,11 @@ const Layout: React.FC<Props> = ({
         <noscript>
           <p>{noScriptMsg}</p>
         </noscript>
-        {showHero && <HeroContent />}
       </header>
       <main className={allowPadding ? 'general-content' : 'home-content'}>
         {children}
       </main>
-      <Footer logoSrc={logoImg} logoBackground="white"></Footer>
+      <Footer logoSrc={logoImg}></Footer>
     </ThemeProvider>
   );
 };

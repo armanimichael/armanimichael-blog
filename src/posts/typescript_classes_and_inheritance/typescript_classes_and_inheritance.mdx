@@ -1,0 +1,276 @@
+---
+title: TypeScript Classes and Inherintance
+crawlerTitle: TypeScript - Classes and Inherintance
+description: As an OOP language, TypeScript relies on classes to define objects. Moreover, it's possible to combine classes to reduce repetitions (Inheritance).
+keywords: 'TypeScript, JavaScript, TypeScript class'
+excerpt: TypeScript OOP concepts.
+slug: /typescript-classes/
+date: 2020-06-21
+category: TypeScript
+---
+
+## OOP in TypeScript
+
+Working with objects is also possible in JavaScript as we already know, however, **TypeScript offers some utilities we don't have in plain JavaScript.**
+
+Objects are instances of classes. A class defines a **reusable component** that defines something we need to work with.
+
+## Some examples
+
+Let's now give some real-world examples. Let's then suppose we need to define a player for a video-game.
+
+A player could have some properties such as its total health, and its speed. We'd also need to define some behaviors, for example, how it moves and attacks.
+
+Let's translate this into code.
+
+```typescript
+class Player {
+  health: number;
+  speed: number;
+
+  constructor(health: number, speed: number) {
+    this.health = health;
+    this.speed = speed;
+  }
+
+  move(): void {}
+
+  attack(): void {}
+}
+
+const player = new Player(100, 8);
+```
+
+The `Player` class consists of two **properties**, a **Constructor**, and two **methods**.
+
+- **Property**: variable bound to the class.
+- **Constructor**: a subroutine called once we create an instance of the class.
+- **Methods**: functions bound to the class.
+
+## Inherintance
+
+Using classes is easy enough, however, we should totally **avoid repeating** ourselves.
+
+Let's suppose we have to create two objects, Dog and Snake.
+
+They're both animals, they share some properties such as name and age, and they both sleep.
+
+Nonetheless, while a dog has legs and walks, a snake doesn't have any leg and crawls.
+
+Let's then create a single class Animal, with the members in common.
+
+```typescript
+class Animal {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+
+  sleep(): void {}
+}
+```
+
+We can take advantage of Inherintance to have avoid repeating the same members across sub-classes (Dog, Snake).
+
+Using Inherintance in TypeScript requires the use of the `extends` keyword.
+
+```typescript
+class Dog extends Animal {
+  legs: number = 4;
+
+  walk(): void {}
+}
+
+class Snake extends Animal {
+  crawl(): void {}
+}
+
+const dog = new Dog('Alvin', 4);
+dog.name; // Alvin
+dog.age; // 4
+dog.legs; // 4
+dog.sleep();
+dog.walk();
+
+const snake = new Snake('Claire', 8);
+dog.name; // Claire
+dog.age; // 8
+dog.sleep();
+dog.crawl();
+```
+
+### Abstract Classes / Methods
+
+Sometimes you don't want to instantiate a class directly and rather using it as a base for other sub-classes. To do so you can use **Abstract Classes.**
+
+Similar reasoning goes behind **Abstract Methods**: methods that don't contain implementation details, and must be implemented in derived classes.
+
+```typescript
+abstract class Animal {
+  abstract sleep(): void;
+}
+
+class Dog extends Animal {
+  sleep(): void {
+    console.log('Zzzzz zzz zzz');
+  }
+}
+```
+
+### Static Properties
+
+**Static Properties** are only visible on the class itself, rather than on their instances.
+
+For example:
+
+```typescript
+class Vector {
+  x: number;
+  y: number;
+
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+
+  static sum(vector1: Vector, vector2: Vector): Vector {
+    const x = vector1.x + vector2.x;
+    const y = vector1.y + vector2.y;
+
+    return new Vector(x, y);
+  }
+}
+
+const vector1 = new Vector(2, 4);
+const vector2 = new Vector(4, 0);
+
+const sumVector = Vector.sum(vector1, vector2);
+sumVector.x; // 6
+sumVector.y; // 4
+```
+
+## Access Modifiers
+
+By default, in JavaScript, every property of a class is public.
+
+**Creating private members is technically possible in JavaScript**, yet it doesn't exist a specific syntax to do that. Making use of **Access Modifiers** in JavaScript makes the code harder to read.
+
+In TypeScript, we can use a bunch of keywords to specify the access level of members:
+
+- `public`: every member is public by default, you can still make it explicit. Public means you can access this property from outside the class as well.
+- `private`: makes the member inaccessible from the outside. Keep in mind that a private member is inaccessible from any sub-class when using Inheritance.
+- `protected`: similar functionality to private, though you can access protected members from within any sub-class.
+
+```typescript
+class Animal {
+  public name: string;
+  private age: number;
+  protected legs: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+class Dog extends Animal {
+  getAge() {
+    console.log(this.age);
+    // Error, age is private! Only accessible in Animal
+  }
+}
+
+const animal = new Animal('Alvin', 4);
+animal.name; // Alvin
+animal.age; // Error - private
+animal.legs; // Error - protected
+
+const dog = new Dog('Claire', 8);
+animal.name; // Alvin
+animal.age; // Error - private
+animal.legs; // Error - protected
+```
+
+### Readonly modifier
+
+It's also possible to create a read-only member by using the `readonly` keyword.
+
+```typescript
+class Animal {
+  public readonly name: string;
+  private age: number;
+  protected legs: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const animal = new Animal('Alvin', 4);
+animal.name = 'Kevin'; // Error, name is read-only!
+```
+
+### Accessors
+
+TypeScript also supports **Accessors**. By using them, you have higher control over the way each member is accessed or edited from the outside.
+
+For instance:
+
+```typescript
+class Animal {
+  private name: string;
+  private age: number;
+  private legs: number;
+
+  get getName() {
+    return this.name;
+  }
+
+  set setName(name: string) {
+    if (!name) throw new Error("The name can't be an empty string!");
+
+    this.name = name;
+  }
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const animal = new Animal('Alvin', 4);
+animal.getName; // Alvin
+animal.setName(''); // Error! The name can't be an empty string!
+animal.setName('Steve');
+anima.getName; // Steve
+```
+
+## Using Interfaces
+
+[In the previous post](/typescript-interfaces/), I talked about interfaces and how to use them to create structured patterns. You can do the same for classes by using the `implements` keyword.
+
+For example:
+
+```typescript
+interface AnimalInterface {
+  name: string;
+  age: number;
+  sleep: () => void;
+}
+
+// This will throw an error
+// Type 'Animal' is missing the following properties from type 'AnimalInterface': name, age, sleep
+class Animal implements AnimalInterface {}
+
+// This class instead implements the interface correctly
+class Animal implements AnimalInterface {
+  name: string = '';
+  age: number = 0;
+
+  sleep(): void {}
+}
+```

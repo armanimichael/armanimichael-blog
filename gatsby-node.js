@@ -33,17 +33,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   for (let i = 0; i < numPages; i++) {
     if (i) {
       createPage({
-        path: `/blog/page/${i}`,
-        component: path.resolve('./src/templates/BlogFeed.tsx'),
-        context: {
-          limit: postsPerPage,
-          skip: i * postsPerPage,
-          numPages,
-        },
-      });
-    } else {
-      createPage({
-        path: `/blog/`,
+        path: `/page/${i}`,
         component: path.resolve('./src/templates/BlogFeed.tsx'),
         context: {
           limit: postsPerPage,
@@ -57,7 +47,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Generate Posts
   posts.forEach(({ node }) => {
     createPage({
-      path: `/blog${node.frontmatter.slug}`,
+      path:
+        node.frontmatter.slug.indexOf('/') !== 0
+          ? `/${node.frontmatter.slug}`
+          : node.frontmatter.slug,
       component: path.resolve(`./src/templates/Post.tsx`),
       context: { id: node.id },
     });
@@ -66,7 +59,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Generate Categories
   categories.forEach(node => {
     createPage({
-      path: '/blog/category/' + node.toLowerCase().replace(/ /g, '-').trim(),
+      path: '/category/' + node.toLowerCase().replace(/ /g, '-').trim(),
       component: path.resolve('./src/templates/Category.tsx'),
       context: {
         category: node,

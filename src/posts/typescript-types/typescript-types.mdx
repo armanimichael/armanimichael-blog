@@ -1,0 +1,163 @@
+---
+title: TypeScript Types
+crawlerTitle: TypeScript - Types
+description: Data types represent what kind of data you're working with. Static typing lets you validate your data, avoiding common errors, and improving readability.
+keywords: 'TypeScript, JavaScript, Data Types'
+excerpt: Assigning Types to data.
+slug: /typescript-types/
+date: 2020-05-30
+category: TypeScript
+---
+
+## Introduction
+
+[In the previous post about TypeScript](/whats-typescript/), I talked about general topics and terms.
+
+Let's dive into the language by formally introducing **Types**.
+
+## What are Types?
+
+Data types are a way to tell the interpreter or the compiler how the data your working with will be used. Types are **attributes of data** itself.
+
+Every programming language works with Types. However, different languages use them differently.
+
+### Interpreted languages
+
+When writing code in an **interpreted language** such as [JavaScript](/category/javascript/), [Python](/category/python/), [PHP](/category/php/), etc., the programmer can't explicitly specify data-types. The interpreter assigns Types based on the variable content.
+
+This method is called **Dynamic Typing**.
+
+While Dynamic Typing makes writing code faster, it comes with some pitfalls.
+
+For instance, the code editor has **no way of knowing if the variables are used badly**. For instance, we can't use string methods on numbers or any other types other than string.
+
+### Compiled languages
+
+Differently from interpreted languages, when there's a compiler, it's mandatory to specify a variable type.
+
+Great examples of compiled languages are the C-family programming languages, Java, Rust, and so on.
+
+**TypeScript is also a compiled language,** and it shares many similarities with C# and other languages.
+
+## Data Types in TypeScript
+
+TypeScript consists of a bunch of predefined types. Moreover, it's possible to create user-defined types.
+
+The basic types are the following:
+
+- **number**: comprehending every type of numbers, from int to floats. JavaScript doesn't differentiate between them. Neither does TypeScript.
+- **boolean**: represents boolean expressions, either true or false.
+- **string**: which indicates text. Everything surrounded by double quotes ("), single quotes ('), or backticks (`).
+- **array**: denotes arrays of the same type. More on this later.
+- **tuple**: similar to arrays but with a fixed number of elements and different known types. More on this later.
+- **object**: represents the non-primitive type, using JavaScript objects.
+- **any**: a generic type, it's the default type if none is specified. Useful when you don't know what type to use.
+- **void**: no type at all. Usually used when a function doesn't return any value. If you know C#, this should be familiar.
+- **undefined** and **Null**: we can assign them to any type, as they're a subtype of all other types.
+- **never**: represents a value that never occurs, such as exception throws and infinite loops.
+
+## Syntax
+
+In the last post, I said that **every JavaScript code is also a valid TypeScript code** as far as you follow strict rules and ECMA standards.
+
+If we transform a JavaScript file to TypeScript, it will work the same.
+
+Therefore, it's possible to slowly upgrade to TypeScript without recreating projects from scratch.
+
+### Variables types
+
+If we want to add types to our new TypeScript code, we can use the following notation.
+
+```text
+let variableName : typeName = variable-value;
+```
+
+For example:
+
+```typescript
+let name: string = 'John';
+let age: number = 24;
+let isWorking: boolean = true;
+```
+
+**Trying to assign the wrong type to a variable would result in an error.**
+
+This is useful because we can notice if there's anything wrong before execution. It's pretty much like running a simple unit test.
+
+### Functions types
+
+The same concept applies to **functions**. We can assign types to arguments and to the return value.
+
+```typescript
+function greet(name: string, lastname: string): void {
+  console.log(`Hello ${name} ${lastname}`);
+}
+```
+
+As you can see, the function accepts two `string`s and doesn't return anything (`void`).
+
+Let's also briefly see the use of never.
+
+```typescript
+function someError(): never {
+  throw new Error('Good job! You broke it!');
+}
+```
+
+There'll be more on functions in later posts.
+
+### Type assertions
+
+Sometimes, you (the programmer) need to tell the compiler you want to set a type by yourself.
+
+For example, this can happen when you pass from the old JavaScript code to TypeScript. You know what type a certain value should have better than the compiler does.
+
+To do so, we use the type assertion syntax. It's possible to do this in two ways, by using the `<type>` syntax or by using the `variableName as type` syntax.
+
+For example, if we want to convert `number` to `string`.
+
+```typescript
+// Standard
+const someNumber: number = 1;
+const someString: string = <string>(<any>someNumber);
+
+// Alternative syntax
+const someNumber: number = 1;
+const someString: string = (someNumber as any) as string;
+```
+
+In contrast to casting in C# and other languages, this does not affect runtime. It's just a way to **let the compiler know the exact type of a value**.
+
+### Arrays
+
+In plain JavaScript, arrays can consist of many different types. With TypeScript, this isn't usually recommended.
+
+Every array should only contain **multiple values of a single type**.
+
+The syntax for arrays in TypeScript is the following. It consist in the type followed by the array notation `[]`.
+
+```typescript
+const langs: string[] = ['C#', 'TypeScript', 'PHP'];
+```
+
+Even if not recommended, **it's possible to define an array of different types** by using `any`.
+
+```typescript
+const mixed: any[] = ['example', 2, false];
+```
+
+### Tuples
+
+**Tuples** don't exist in JavaScript, and, inside the compiled code, they will convert to arrays.
+
+When using TypeScript, they define an array with a **fixed number** of **ordered elements** of which **types are known**.
+
+```typescript
+const list: [number, string] = [1, 'example'];
+
+const differentList: [boolean, number, string] = [true, 2, 'example'];
+```
+
+## Conclusions
+
+Types are a powerful introduction to TypeScript. They provide "on the fly" feedback from the IDE we're using and let us forget about common JavaScript errors.

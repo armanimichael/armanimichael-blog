@@ -43,7 +43,7 @@ const Footer: React.FC<Props> = ({ logoSrc, customTitle, logoBackground }) => {
             rel="nofollow noopener noreferrer"
             target="_blank"
           >
-            Developed by Michael Armani
+            Developed by Me
           </a>
         </div>
       </FooterStyled>

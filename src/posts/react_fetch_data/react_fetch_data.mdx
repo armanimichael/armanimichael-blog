@@ -1,0 +1,194 @@
+---
+title: Fetch data from APIs in React
+crawlerTitle: React - Fetch data from APIs
+description: Learn how to fetch data from Web APIs using ReactJS. Creating dynamic components using free Web APIs or fetching data from you own server.
+keywords: React, Fetch, APIs, React fetch
+excerpt: How to populate your React App with dynamic data from APIs.
+slug: /reactjs-fetch-data-from-apis/
+date: 2020-01-29
+category: React
+---
+
+**React** is a flexible library, working with local data is often enough, but you may need to **fetch external data from Web APIs**. Note that, when working with APIs, you have to know about **asynchronism**.
+
+As a result, knowing how to properly use [ReactJS Lifecycles](/reactjs-lifecycle-events/) if fundamental. In this particular case, `componentDidMount()`.
+
+## JavaScript fetch()
+
+JavaScript natively comes with a **fetch API** we can use.
+
+`fetch()` only takes one mandatory argument, the **path to the resource** you want to fetch, and it returns a [**Promise**](/javascript-promises/).
+
+## ReactJS implementation
+
+Now, let's see how to practically use `fetch()` in React. For this example, I'm going to use [urinames](https://uinames.com/), where you can get random names in JSON format.
+
+Firstly, **let's create a component and a state** containing the default data (an empty object), we're going to call it `Person`.
+
+```jsx
+import React, { Component } from 'react';
+
+// API Url
+const API = 'https://uinames.com/api/';
+
+class Person extends Component {
+  // Initial data is an empty object
+  state = {
+    data: {},
+  };
+
+  componentDidMount() {}
+
+  render() {
+    const { name, surname } = this.state.data;
+    return (
+      <h1>
+        {name} {surname}
+      </h1>
+    );
+  }
+}
+
+export default Person;
+```
+
+After that, we can fetch the data from `componentDidMount()`.
+
+```jsx
+componentDidMount() {
+  fetch(API)
+  	// Parsing fetched data
+  	.then( res => res.json() )
+  	// Changing state
+  	.then( name => this.setState({ data: name });
+}
+```
+
+React can figure out by itself when to update the **virtual DOM**. Therefore, in this example, the `Person` component is rendered twice: at the beginning, and once it fetched the name from the API.
+
+## Detect Loading
+
+Every time we work with **asynchronous data**, we would certainly like to know if something is **loading**. We can achieve that with another state, which we'll call `isLoading`.
+
+```jsx
+state = {
+  data: {},
+  isLoading: true,
+};
+```
+
+Going back to the `fetch()` method, we can set `isLoading` to `false` once the data has been fetched.
+
+```jsx
+componentDidMount() {
+  fetch(API)
+  	// Parsing fetched data
+  	.then( res => res.json() )
+  	// Changing state
+  	.then( name => this.setState({
+    	data: name,
+    	isLoading: false
+    });
+}
+```
+
+And finally, create some sort of **loading message** inside `render()`.
+
+```jsx
+render() {
+  const { name, surname } = this.state.data;
+  const { isLoading } = this.state;
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+  return <h1>{name} {surname}</h1>;
+}
+```
+
+## Detect Errors
+
+Another important detail we need to keep track of is **errors**. Using **Promises**, we can detect errors inside the `catch()` block.
+
+Unfortunately, the native `fetch()` method **won't detect HTTP Error status codes** (such as 404 or 500), and won't enter the `catch()` block. Instead, **it will resolve normally**, but **setting the ok status to false**.
+
+This is why you may want to use an external library such as [Axios](https://www.npmjs.com/package/axios), [node-fetch,](https://github.com/node-fetch/node-fetch) or [Request](https://github.com/request/request).
+
+Let's add an error state, where we can store any error details.
+
+```jsx
+state = {
+  data: {},
+  isLoading: true,
+  errors: false,
+};
+```
+
+Let's then update `errors`.
+
+```jsx
+componentDidMount() {
+  fetch(API)
+  	// Parsing fetched data
+  	.then( res => res.json() )
+  	// Changing state
+  	.then( name => this.setState({
+    	data: name,
+    	isLoading: false
+    })
+    .catch( errs => this.setState({
+    	errors: errs,
+    	isLoading: false
+    }));
+}
+```
+
+If you wish to detect **HTTP Error status codes**, you could check the `ok` status. You can later decide how to properly catch those errors.
+
+```jsx
+componentDidMount() {
+  fetch(API)
+  	// Parsing fetched data
+  	.then( res => {
+    	if (res.ok) {
+          return res.json()
+        }
+    	else {
+          throw new Error('Some kind of error...');
+        }
+    })
+  	// Changing state
+  	.then( name => this.setState({
+    	data: name,
+    	isLoading: false
+    })
+    .catch(errs => this.setState({
+    	errors: errs,
+    	isLoading: false
+    }));
+}
+```
+
+In the end, we can let the user know something is not working.
+
+```jsx
+render() {
+  const { name, surname } = this.state.data;
+  const { isLoading, errors } = this.state;
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+  else if (errors) {
+    return <h1>Error!</h1>;
+  }
+
+  return <h1>{name} {surname}</h1>;
+}
+```
+
+## Conclusion
+
+Fetching APIs is easy and straightforward. You could potentially create your **REST API**, using **NodeJS** or **PHP**. For instance, if you decide to use **PHP and MySQL**, I have an article about [SQL Injection and how to prevent it](/php-how-to-prevent-sql-injection/).
+
+Moreover, out there, there are tons of free and accessible APIs you could use for your projects, similar to [urinames](https://uinames.com/).

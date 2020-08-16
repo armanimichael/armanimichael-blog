@@ -18,11 +18,11 @@ const Container = styled.div`
 
   @media screen and (max-width: 800px) {
     &:first-child {
-      margin: 24px 30px 24px 30px;
+      margin: 44px 30px 44px 30px;
     }
 
-    margin: 0px 30px 24px 30px;
-    width: calc(100% - 10px);
+    margin: 0px 30px 44px 30px;
+    width: 100%;
   }
 `;
 
@@ -33,6 +33,12 @@ const PostStyled = styled(Link)`
   box-sizing: border-box;
   border-radius: 10px 10px 0 0;
   text-decoration: none;
+
+  & span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 20px;
+  }
 
   @media screen and (max-width: 800px) {
     padding: 30px;

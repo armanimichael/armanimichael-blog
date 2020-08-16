@@ -1,0 +1,97 @@
+---
+title: How to create a Discord Bot in Python
+crawlerTitle: How to create a Discord Bot in Python
+description: Learn how to develop and run a Discord Bot in Python. Specifically, using discord.py, an useful API Wrapper.
+keywords: Python, Discord, Discord.py, Bot
+excerpt: Discord Bot with discord.py.
+slug: /discord-bot-python/
+date: 2020-04-17
+category: Python
+---
+
+## Why Discord?
+
+[Discord](https://discordapp.com/) is a VoIP application, widely used among video gaming communities and particularly useful in these periods, stuck home because of the virus.
+
+Discord lets you manage big voice and chat servers. **Auto-moderate** chats and users can significantly improve everybody's life on your server.
+
+## Discord.py
+
+Working with [Python](/category/python/) is easy and straightforward.
+
+Instead of working directly with the API, I'm going to use an **API Wrapper** called [discord.py](https://discordpy.readthedocs.io/en/latest/).
+
+## Installation
+
+You can install **discord.py** via pip.
+
+You can get the library directly from PyPI:
+
+```shell
+python3 -m pip install -U discord.py
+```
+
+If you are using Windows, then the following should be used instead:
+
+```shell
+py -3 -m pip install -U discord.py
+```
+
+## Initializing the Bot
+
+Firstly, you'll need a registered discord application. You can do that directly from [discord's developers portal](https://discordapp.com/developers/applications).
+
+Once ready, you can name your Bot and copy its **token**, you'll need it later.
+
+## Minimal Bot
+
+A discord bot continuously **listens to events**.
+
+For example, if you'd like to check for users' messages, you can use the `on_message` listener.
+
+A **Bot is a particular** **Client**, to create one you'll need to access `discord.Client`.
+
+Underneath, a simple example with procedural programming:
+
+```python
+import discord
+
+TOKEN = 'The token you copied before'
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print(f'Logged on as {client.user}!')
+
+@client.event
+async def on_message(message):
+    print(f'Message from {message.author}: {message.content}')
+
+client.run(TOKEN)
+```
+
+If you prefer an [OOP approach](/python-oop/), it'll look like this:
+
+```python
+import discord
+
+TOKEN = 'The token you copied before'
+
+class Bot(discord.Client):
+    async def on_ready(self):
+        print(f'Logged on as {self.user}!')
+
+    async def on_message(self, message):
+        print(f'Message from {message.author}: {message.content}')
+
+client = Bot()
+client.run(TOKEN)
+```
+
+## After this...
+
+This post explored the basics of creating a **Discord Bot using Python**. From here, you're free to expand your Bot by adding more utilities and commands.
+
+If you'd like to see some examples, you can check my [small project out](https://github.com/HeaGleZone/botzoz-discord-bot). I'm working on a Discord Bot for my Server. **I push little updates every once in a while**, but it should be a basic example of a Bot's potentials.
+
+Furthermore, discord.py helps you out with many different extensions. You can use them to split code, easily create commands and more. You can read more on their [Website](https://discordpy.readthedocs.io/en/latest/index.html).

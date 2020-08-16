@@ -1,0 +1,84 @@
+---
+title: Generating the Fibonacci Sequence with Recursion
+crawlerTitle: Generating the Fibonacci Sequence with Recursion
+description: How to use recursion in any programming language to generate any nth value of the Fibonacci Sequence.
+keywords: Programming, Problem solving, Fibonacci, Programming interview
+excerpt: Solving a common question in Programming Interviews.
+slug: /fibonacci-sequence/
+date: 2020-03-13
+category: Problem Solving
+---
+
+## Software Interviews
+
+A while ago, I had an interview for a **Software Developer** position.
+
+After some general questions, they got me into some **thinking**. Knowing some programming languages is excellent, but can you apply them to real use cases?
+
+They asked me if I could use recursion to get any **nth number from the Fibonacci Sequence**. Let's see how we can approach this problem.
+
+## What is the Fibonacci sequence
+
+Also known as the Fibonacci numbers, it's a sequence of integers starting from 0 (or 1) and going on indefinitely.
+
+The main property of this sequence is that **each number is the sum of the two preceding ones.**
+
+For instance, the first 10 values are `0 1 1 2 3 5 8 13 21 34`.
+
+## What about Recursion?
+
+Recursion is an interesting topic in mathematics and, consequently, programming.
+
+It consists of dividing a problem into smaller and similar bits, solving the main problem though many iterations.
+
+To do so, **we have to call a function from within the function itself**.
+
+Note that, in some cases, this can lead to an infinite loop.
+
+## Solving the problem
+
+To solve this problem, we can virtually use any programming language. In this case, I'm using **C#**.
+
+The final function should look similar to this:
+
+```csharp
+int GetNthFibonacci(int n)
+{
+    if (n == 0) return 0;
+    if (n < 2) return 1;
+
+    return NthFibonacci(n-1) + NthFibonacci(n-2);
+}
+```
+
+Let's analyze it.
+
+Firstly, we're returning an integer and accepting an integer, which will be the **nth number** of the sequence.
+
+```csharp
+int GetNthFibonacci(int n)
+```
+
+Secondly, we need to make sure that the **first 3 numbers** always correspond to `0 1 1`.
+
+```csharp
+if (n == 0) return 0;
+if (n < 2) return 1;
+```
+
+Finally, we get to the actual **recursion**. The next number in order will be the sum of the two preceding ones.
+
+```csharp
+return NthFibonacci(n-1) + NthFibonacci(n-2);
+```
+
+### Using the function
+
+We can now generate the sequence. For example, let's get the first 10 numbers in console.
+
+```csharp
+for (int i = 0; i < 10; i++)
+{
+    Console.Write(NthFibonacci(i) + " ");
+}
+```

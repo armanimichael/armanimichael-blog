@@ -1,0 +1,159 @@
+---
+title: React Events
+crawlerTitle: React - Handling Events
+description: Learn more about JavaScript Events and their implementation in ReactJS.
+keywords: React, JavaScript Events, React Events, Events
+excerpt: Handling Events with ReactJS
+slug: /reactjs-events/
+date: 2020-05-17
+category: React
+---
+
+## Introduction
+
+We know [React](/category/react/) is a library for building User Interfaces. Hence, we need a way to **interact** with the user.
+
+## Events in JavaScript
+
+Events already exist in [JavaScript](/category/javascript/). Events record any particular interaction with the HTML page, which is later handled by **Events Handlers**.
+
+Events Handlers are bound to their respective HTML Component. For example, if we want to register a mouse click in plain HTML, we can do this.
+
+JavaScript code must be in a string!
+
+```html
+<h1 onclick="alert('Hello there!')">Click me!</h1>
+```
+
+Alternatively, we can pass a function to the handler, which is also better for **code readability**.
+
+```html
+<script>
+  function handleClick() {
+    alert('Hello there!');
+  }
+</script>
+
+<h1 onclick="handleClick()">Click me!</h1>
+```
+
+## Events in React
+
+Events in React are almost identical to JavaScript.
+
+The main differences are that React events are named using camelCase, rather than lowercase. For instance, instead of writing "onclick", we have to write "onClick".
+
+Moreover, with JSX, we can **pass functions** instead of strings to the events.
+
+Going back to the previous example in plain JavaScript, we can rewrite that in React like so.
+
+### Functional Component example
+
+```jsx
+import React from 'react';
+
+const ClickMe = () => {
+  const handleClick = e => {
+    alert('Hello there!');
+  };
+
+  return <h1 onClick={handleClick}>Click me!</h1>;
+};
+
+export default ClickMe;
+```
+
+### Class Component example
+
+```jsx
+import React, { Component } from 'react';
+
+class ClickMe extends Component {
+  handleClick() {
+    alert('Hello world!');
+  }
+
+  render() {
+    return <h1 onClick={this.handleClick}>Click me!</h1>;
+  }
+}
+
+export default ClickMe;
+```
+
+Another detail to keep in mind when working with [Class Components](/reactjs-components/) is **biding**. If we want to refer to `this` inside the Event Handler, we need to bind the function to the class.
+
+```jsx
+import React, { Component } from 'react';
+
+class ClickMe extends Component {
+  constructor() {
+    super();
+
+    this.state = { clicked: false };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({
+      clicked: !this.state.clicked,
+    });
+  }
+
+  render() {
+    return (
+      <>
+        <h1 onClick={this.handleClick}>Click me!</h1>
+        <p>{this.state.clicked ? '♣' : '♠'}</p>
+      </>
+    );
+  }
+}
+
+export default ClickMe;
+```
+
+A simpler option would be using arrow functions.
+
+```jsx
+import React, { Component } from 'react';
+
+class ClickMe extends Component {
+  state = { clicked: false };
+
+  handleClick = () => {
+    this.setState({
+      clicked: !this.state.clicked,
+    });
+  };
+
+  render() {
+    return (
+      <>
+        <h1 onClick={this.handleClick}>Click me!</h1>
+        <p>{this.state.clicked ? '♣' : '♠'}</p>
+      </>
+    );
+  }
+}
+
+export default ClickMe;
+```
+
+When we create an Event Handler, we may want to pass other arguments rather than the Event Object only. For this purpose, we can work around it like this.
+
+```jsx
+...
+
+<h1 onClick={(e) => handleClick(customArgument, e)}>Click me!</h1>
+
+...
+```
+
+## Far Beyond...
+
+Without Events, a React App wouldn't have a single piece of interactivity.
+
+Other important events include loading handling and various optimizations, for example, the `onLoad` event for images.
+
+Working efficiently with Events can take your Apps to the next level.

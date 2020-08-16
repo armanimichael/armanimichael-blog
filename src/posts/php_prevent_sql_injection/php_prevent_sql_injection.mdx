@@ -1,0 +1,141 @@
+---
+title: How to prevent SQL Injection in PHP
+crawlerTitle: PHP - How to prevent SQL Injection
+description: SQL injection is one of the most common types of attacks on the Web. PHP offers multiple methods to prevent SQL injection. Let's see how they work.
+keywords: PHP, MySQL, SQL Injection, Prepared statement
+excerpt: Built in methods to avoid SQL Injection in PHP.
+slug: /php-how-to-prevent-sql-injection/
+date: 2020-01-16
+category: PHP
+---
+
+## What are Injection Attacks?
+
+When talking about Web Attacks, **Injection Attacks** are among the most used methods. They consist of running commands people should not be able to run, by **exploiting how Websites use inputs and forms**.
+
+To clarify, if a Website is vulnerable to this type of attack, anyone could run commands on your database and/or server.
+
+## How does this vulnerability look in PHP?
+
+Firstly, **if you have no clue how a SQL Injection vulnerability looks like**, take a peek at this:
+
+```php
+$user = $_POST['user'];
+$password = $_POST['password'];
+
+$query = "SELECT * FROM users WHERE user ='$user' AND pwd='$password'";
+```
+
+The **user's input is passed directly to the query** as a string. For these examples, I'm using **MySQL**.
+
+Anyone could run a MySQL command on your database, with the risk of exposing sensible data.
+
+For instance, if you were to write `' or 1=1` inside of the password input, the final query will look like this:
+
+```sql
+SELECT * FROM users WHERE user ='' AND pwd='' or 1=1;
+```
+
+Which returns the entire table `users`, as the **OR operator makes the statement true**.
+
+## Using MySQLi Prepared Statements
+
+One of the easiest ways to prevent SQL Injection is by using **prepared statements**. They come from the [mysqli PHP extension](https://www.php.net/manual/en/class.mysqli.php).
+
+After you connected to the DB you can simply rewrite the script like so (`$conn` is the DB connection):
+
+```php
+$user = $_POST['user'];
+$password = $_POST['password'];
+
+if ($stmt = $conn->prepare("SELECT * FROM users WHERE user=? AND pwd=?")) {
+    $stmt->bind_param("ss", $user, $password);
+    $stmt->execute();
+    $stmt->close();
+}
+```
+
+### The syntax
+
+In the first line, we're checking for possible errors when creating the prepared statement.
+
+The `prepare()` method **accepts a string**, instead of hard-coding variables in, we have to **replace their values with the** `?` **placeholder**.
+
+```php
+if ($stmt = $mysqli->prepare("SELECT * FROM users WHERE user=? AND pwd=?")) {
+```
+
+The second step consists in binding the variables to the parameters using the `bind_param()` method.
+
+The first argument is a **string**, where we specify the expected **variable types**:
+
+- **i** = integer
+- **d** = double
+- **s** = string
+- **b** = blob
+
+The last parameters are the variables we're binding (`$user` and `$password`). The _variables must be in the **same order** they appear in the query statement_.
+
+```php
+$stmt->bind_param("ss", $user, $password);
+```
+
+Lastly, the final two methods **execute** the query and **close** the statement.
+
+```php
+$stmt->execute();
+$stmt->close();
+```
+
+Furthermore, you could use other methods such as `bind_result()` and `fetch()` to display your output.
+
+## Using PDO Prepared Statement
+
+In contrast with mysqli (which supports only MySQL), **PDO supports 12 Databases in total**.
+
+Another relevant difference is that it supports **named parameters**, which means you don't have to write `?` into the query, you can simply use `:param_name`.
+
+Performance-wise, **PDO is slightly slower than mysqli** (MySQLi is a native extension). Still, it's not relevant unless you have an enormous work-load.
+
+**PDO** is usually the best method to prevent SQL Injection in PHP.
+
+Let's see how's the script looks:
+
+```php
+$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
+$stmt = $conn->prepare('SELECT * FROM users WHERE user=:user AND pwd=:pwd');
+$stmt->execute(array(':user' => $user, ':pwd' => $password));
+```
+
+### The syntax
+
+**By default, PDO uses emulated prepared statements**, we have to make sure that we're using actual prepared statements on the DB we're using.
+
+Therefore, the `setAttribute()` method disables the emulation option:
+
+```php
+$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+```
+
+Similarly to MySQLi, we have to pass a **string** to `prepare()`: note that this time we're using **named parameters** instead of question marks.
+
+```php
+$stmt = $conn->prepare('SELECT * FROM users WHERE user=:user AND pwd=:pwd');
+```
+
+In the end, we can execute our query using the `execute()` method, with an **Associative Array** (containing the variables given to the statement) as the argument:
+
+```php
+$stmt->execute(array(':user' => $user, ':pwd' => $password));
+```
+
+If you want to **print the results**, there are a bunch of methods for getting the selected **rows**, such as `fetchAll()`.
+
+## Some consideration
+
+To sum up, as **attacks on the Web can be achieved in multiple ways**, we should keep updated on every possible solution **already implemented** into the language we're using.
+
+In other words, instead of using string methods to sanitize User's inputs and so on (for example defined in a [React App](/react-for-beginners/)), we should us **built-in features** when available.
+
+**User's inputs are one of the weakest components of Online Applications**, keep in mind that once a user has a way to communicate with the server, something can possibly go wrong if no precautions are taken.

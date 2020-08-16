@@ -30,7 +30,7 @@ const PostsList: React.FC<Props> = ({ edges }) => {
       <PostPreview
         key={id}
         title={title}
-        path={'/blog' + slug}
+        path={slug}
         date={date}
         category={category}
         excerpt={excerpt}

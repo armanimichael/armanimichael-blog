@@ -14,6 +14,62 @@
     "icon": ""
   },
   {
+    "name": "NodeJS",
+    "description": "Node.js is a server-side platform wrapped around the JavaScript language for building scalable, event-driven applications.",
+    "color": "#46483d",
+    "background": "#90c53f",
+    "icon": ""
+  },
+  {
+    "name": "CSS",
+    "description": "Cascading Style Sheets are used to format the layout of Web pages. They can be used to define text styles, table sizes, and other aspects of Web pages.",
+    "color": "#fefefe",
+    "background": "#3799d6",
+    "icon": ""
+  },
+  {
+    "name": "Web Dev",
+    "description": "Learn more about Web Development theoretical and applied aspects. This category includes anything too generic to have its own.",
+    "color": "white",
+    "background": "#fd4239",
+    "icon": ""
+  },
+  {
+    "name": "MonoGame",
+    "description": "MonoGame is a free C# game developing framework. It's an open-source implementation of the  Microsoft XNA 4 API.",
+    "color": "white",
+    "background": "#e73c00",
+    "icon": ""
+  },
+  {
+    "name": "PHP",
+    "description": "PHP: Hypertext Preprocessor is an HTML-embedded Web scripting language. PHP is largely applied to Backend Development.",
+    "color": "black",
+    "background": "#767bb3",
+    "icon": ""
+  },
+  {
+    "name": "Problem Solving",
+    "description": "The synthesized role of a programmer is to solve problems. Let's check some common problems and algorithms out.",
+    "color": "#D6ED17",
+    "background": "#606060",
+    "icon": ""
+  },
+  {
+    "name": "Python",
+    "description": "Python is a high-level Object Oriented programming language designed to be easy to read and simple to implement.",
+    "color": "#ffdd55",
+    "background": "#3570a0",
+    "icon": ""
+  },
+  {
+    "name": "CS",
+    "description": "Learn more about Computer Science. One subject to rule them all! Computer Science is the foundation of everything this blog is based on.",
+    "color": "#FCCF0D",
+    "background": "#2A2927",
+    "icon": ""
+  },
+  {
     "name": "TypeScript",
     "description": "TypeScript is a superset of JavaScript developed by Microsoft that adds static typing, classes, interfaces, generics, etc..",
     "color": "white",

@@ -1,0 +1,84 @@
+---
+title: Setting Up a React Project
+crawlerTitle: Setting Up a React Project
+description: How to set-up, run and edit your first React project using create-react-app. Learn how to easily create a starting point to develop a React application.
+keywords: React, ReactJS, JavaScript, Web App
+excerpt: Using create-react-app to set-up you first React App.
+slug: /react-for-beginners/
+date: 2019-08-14
+category: React
+---
+
+## Introduction
+
+Building a React App is **easier** than you think. Unfortunately, setting up the environment from scratch may get complicated. Starting from a template is often a wise choice, **create-react-app** helps you set up a pre-built environment.
+
+- CLI (e.g. [Git Bash](https://gitforwindows.org/), but you can use the default one if you wish )
+- Code Editor (e.g [Visual Studio Code](https://code.visualstudio.com/))
+- [NodeJS](https://nodejs.org/)
+
+Firstly, you'll need to install **create-react-app** using [NPM](https://www.npmjs.com/) (it comes with NodeJS). Just run the following command in the shell.
+
+```shell
+npx create-react-app first-app
+```
+
+Note that the **loading messages don't appear on some CLIs**. Patiently wait for it to exit the execution.
+
+Once everything is installed and working, you can navigate into the newly created folder.
+
+## React App File Structure
+
+Every React Application has its standard structure. Let me briefly explain it:
+
+- **/build** contains the optimized and final application, ready to be deployed
+- **/node_modules** comes from NPM and includes every package required for the App to run correctly
+- **/public** contains the App's static files. This folder usually remains untouched. You can use this folder to edit the App's icon, title, etc.
+- **/src** is where you define Components and the App's logic
+
+## Real-time editing
+
+At this point, the application is **ready** to go. If you wish, you can start making changes to the code. You can visually debug in **real-time** what you're editing by running the following command.
+
+```shell
+npm run start
+```
+
+Awesome! Now you're good to go! The entry point for the Application is `./src/App.js`, which should look something like this.
+
+```jsx
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+Now try and **edit** some code, then save (ctrl + s). You should see **real-time** changes in the **browser** (at **localhost:3000** – the default browser automatically opens when you run `npm run start`).
+
+## What's next?
+
+Finally, you've initialized a React App, it's time for you to learn more about this library. Go take a look at **how do Components work**, [check this post out](/reactjs-components/)!

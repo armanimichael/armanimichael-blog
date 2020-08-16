@@ -1,0 +1,96 @@
+---
+title: JavaScript Generators
+crawlerTitle: JavaScript - Introduction to Generators
+description: JavaScript Generators were introduced in ECMAScript 6. They let you stop and resume them while keeping track of the last iteration.
+keywords: JavaScript, JavaScript Generators, JavaScript iterators
+excerpt: Introduction to Generators.
+slug: /javascript-generators/
+date: 2020-05-23
+category: JavaScript
+---
+
+## What are Generators?
+
+Generators are nothing more than special **functions**. They let you control the **iterator**, you can stop and resume them at any time.
+
+The result will be what you except, differently from iterators like the for...of loop they **keep track of the last operation they did**.
+
+Generators were introduced in **ES6**.
+
+Generators are great for many reasons. For instance, if you use loops inside the generators, they **will not block the execution of the program**.
+
+## Generators Syntax
+
+Initializing [JavaScript](/category/javascript/) Generators is similar to creating a normal function, except for the use of the asterisk `*`.
+
+At the moment, it's not possible to create generators using arrow functions.
+
+```javascript
+function* generator() {
+    ...
+}
+```
+
+But how does the generator know when to pause itself? To do so, we make use of the `yield` keyword.
+
+As soon as we use `yield`, the generator will stop.
+
+```javascript
+function* generator() {
+    yield 1;
+}
+```
+
+Yield returns its value only **once**. If you have multiple yields inside the generator, every time you call the function, it will move to the next generator.
+
+Using the return statement inside the generator will make sure that, as soon as you have no more yields to iterate, it will return a fallback value or statement.
+
+```javascript
+function* generator() {
+    yield 1;
+    yield 2;
+    yield 3;
+    
+    return 0;
+}
+```
+
+Calling the generator like any other function, won't return any yield value. To use the generator, we first need to initialize it. Then we can use the `generator.next()` syntax to get the `yield` value. The `.next()` method will return an object consisting of two properties.
+
+- `value`: the actual value of the yield.
+- `done`: will result to `true` as soon as there're no more yields.
+
+```javascript
+const gen = generator();
+
+gen.next(); // { value: 1, done: false }
+gen.next(); // { value: 2, done: false }
+gen.next(); // { value: 3, done: false }
+gen.next(); // { value: 0, done: true }
+```
+
+You can write any kind of logic you wish inside the generator, pass arguments, and use loops. For instance:
+
+```javascript
+function* exampleGenerator(n) {
+  for (let i = 0; i < n; i++) {
+    yield console.log(i * 2 + 1);
+  }
+
+  return console.log('No more yields!');
+}
+
+const gen = exampleGenerator(4);
+
+gen.next(); // 1
+gen.next(); // 3
+gen.next(); // 5
+gen.next(); // 7
+gen.next(); // No more yields!
+```
+
+## There's more
+
+This is a simple introduction to Generators. Therefore, it is possible to do a lot more than the simple examples I showed above.
+
+Working with Generators can help you out when appling the **Concurrent Programming** paradigm. Their ability to pause and resume at any given time is very powerful. All you have to do is finding where to apply them to improve your programs.

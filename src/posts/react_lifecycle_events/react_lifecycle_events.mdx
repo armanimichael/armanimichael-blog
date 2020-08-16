@@ -1,0 +1,172 @@
+---
+title: React Lifecycle Events
+crawlerTitle: React Lifecycle Events
+description: Every React component passes through a series of Lifecycle Events. We can hook these Lifecycle Events, helping us managing resources and events.
+keywords: React, React lifecycle, React Event, React performance
+excerpt: Managing resources, events and functionalities with Lifecycle Events.
+slug: /reactjs-lifecycle-events/
+date: 2020-01-18
+category: React
+---
+
+## Introduction
+
+_This post concerns [Class Components](/reactjs-components/) only._
+
+During the life of a [React](/react-for-beginners/) component, different Lifecycle **Events** get called in a particular order. These Events are called **Lifecycles**. They differ by execution-order and by their functionality.
+
+Primarily, we can use **Lifecycles** when we need to **free up resources or/and implement custom behaviors**.
+
+We can divide them into categories:
+
+- Initialization
+- Mounting
+- Updating
+- Unmounting
+
+## Initialization
+
+### The Constructor
+
+As soon as we create a **React Class**, the component runs its Constructor. During this phase, **React initializes the default props, and you can define a starting state**.
+
+For instance, following the [Official React Docs](https://reactjs.org/docs/state-and-lifecycle.html) example, we could define a Clock component as following:
+
+```jsx
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date()
+    };
+}
+```
+
+[As seen in a previous post](/reactjs-components/), we can later update the state using `this.setState()`.
+
+Moreover, you can use the **Constructor** to **bind functions to the component**, although you could use [Arrow Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) to avoid that.
+
+## Mounting
+
+Right after the Constructor, a few other methods initially run. At this point in the component's lifetime, the **component is visible (or is creating) in the DOM**.
+
+During the Mounting stage, three methods execute, in order:
+
+1.  `getDerivedStateFromProps()` is a static method (you can't use `this`), you can use it to update the state based on the prop value. It invokes every time the component Renders (it's also part of Updating).
+2.  `render()` **returns JSX Elements**, it's necessary to call `render()` in every component.
+3.  `componentDidMount()` can be used to **fetch APIs** or process operations on the **DOM**.
+
+## Updating
+
+These methods execute **before the component mounts in the DOM.** render() and getDerivedStateFromProps() are both in Mouting and Updating. They can run multiple times during execution.
+
+In order:
+
+- `getDerivedStateFromProps()`
+- `shouldComponentUpdate()` returns a boolean (true by default) which **indicates if the component should keep on rerendering**. You can return false when rendering only impacts performances, and it's not necessary.
+- `render()`
+- `getSnapshotBeforeUpdate()` gains you access to props and state of the previous render and the current one.
+- `componentDidUpdate()` runs as soon as the component updates.
+
+## Unmounting
+
+Finally, we have one remaining event `componentWillUnmount()`. This particular React Lifecycle Event **triggers when the component is removed from the DOM**.
+
+Usually, this method is used for **cleanups**, for example, when using **timers and intervals**.
+
+## Examples
+
+Let's bring the Clock Component example back for a second. We can implement two commonly used Lifecycles, `componentDidMount()` and `componentWillUnmount()`.
+
+Firstly, we need to create a timer to update the clock's time, we'll do this in `componentDidMount()`:
+
+```jsx
+componentDidMount() {
+  this.timer = setInterval(
+    () => this.tick(),
+    1000
+  );
+}
+```
+
+This timer will update every second (1000 milliseconds), calling the tick method below:
+
+```jsx
+tick() {
+  this.setState({
+    date: new Date()
+  });
+}
+```
+
+At this point, we have to display the time via some JSX Elements in the render method:
+
+```jsx
+render() {
+	const { date } = this.state;
+	return <h1>Current time: { date.toLocaleTimeString() }</h1>;
+}
+```
+
+As soon as the component unmounts, `this.timer` will still run, risking to cause problems we don't want to deal with. Thus, we can clean `this.timer` inside `componentWillUnmount()`:
+
+```jsx
+componentWillUnmount() {
+	clearInterval(this.timer);
+}
+```
+
+It's good practice to write `render()` at the **end of the class**, and our **custom methods after Lifecycles**. Let's see the final component:
+
+```jsx
+import React from 'react';
+
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      date: new Date(),
+    };
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date(),
+    });
+  }
+
+  render() {
+    const { date } = this.state;
+    return <h1>Current time: {date.toLocaleTimeString()}</h1>;
+  }
+}
+```
+
+## Possible improvements
+
+Previously, we defined the `state` **inside the Constructor**. This technique is totally valid, however, a shorter way to define a state exists:
+
+```jsx
+class Clock extends React.Component {
+  state = {
+    date: new Date(),
+  };
+
+  // Continues...
+}
+```
+
+As you can see, we can easily define the initial state directly inside the Class.
+
+## Conclusions
+
+Correctly using Lifecycle Events can significantly improve our React Apps performances, as well as giving us greater control over our Components.

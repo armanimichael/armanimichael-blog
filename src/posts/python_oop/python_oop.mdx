@@ -1,0 +1,192 @@
+---
+title: Python and OOP
+crawlerTitle: Object-Oriented Programming in Python 3
+description: Learn the fundamentals of Object-oriented programming by applying its principles in Python 3. Get a better understanding of OOP from practical examples.
+keywords: Python, OOP, Python OOP, Object oriented programming, Object-oriented programming
+excerpt: What's OOP and how to apply it in Python.
+slug: /python-oop/
+date: 2020-03-19
+category: Python
+---
+
+## What is OOP
+
+OOP stands for Object-Oriented Programming. This term refers to a widely-used programming paradigm.
+
+We can refer to an **Object**, as a **smaller section** of the **big problem** we need to solve.
+
+Between the most common OOP languages, we can find Python, Java, C#, PHP, JavaScript, C++, and many more.
+
+Objects are instances of **classes**, which contain **data** (in the form of variables and fields) and **methods**.
+
+Moreover, **Objects' methods can access the class** itself, giving them the ability to read and edit the contained data.
+
+For instance, if we defined a program for a Zoo, we'd define Objects for animals, tickets, food, etc.
+
+Most languages support OOP, as it is a powerful way to split programs in smaller and maintainable bits.
+
+On the other hand, in contrast with OOP, we can find procedural programming.
+
+For example, C is merely a procedural programming language. C++ is its evolutions, with OOP capabilities.
+
+## OOP in Python
+
+### Classes
+
+Python's OOP syntax follows the same rules as any other OOP language. For instance, let's see how to create a **class**.
+
+In this example, I'm creating a class for a **Point Object**.
+
+```python
+class Point:
+    'Defines a 2D Point'
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+```
+
+Conventionally, every Python **class name must use** [upper camel case notation](https://en.wikipedia.org/wiki/Camel_case)**.**
+
+The string directly underneath the class notation serves as a description for the class' **documentation**. You can do the same for methods, writing a string just after their initialization.
+
+This description's visible as a hint in any major code editor.
+
+The first method we're defining is the **Constructor method.** This method uses a special syntax, and it's what's **called once we initialize our class** (more on this later).
+
+The Constructor's first argument is `self`, a **reserved keyword that grants you access to the Class itself**. This is similar to `this`, if you're familiar with C#, JavaScript, etc..
+
+Inside the Constructor, we're **creating two fields** containing the **x and y coordinates**. Note how the `self` keyword is being used.
+
+We can create additional methods inside the class. For example, we could define a method returning both coordinates in the console.
+
+It's common sense to write methods' names in lowercase and with words divided by underscores.
+
+Let's expand the previous example.
+
+```python
+class Point:
+    'Defines a 2D Point'
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def get_complete_coordinates(self):
+        print("(" + str(self.x) + ", " + str(self.y) + ")")
+```
+
+### Class Inheritance
+
+The good thing about OOP is **reusability**.
+
+For example, let's see how to create a Particle Object class.
+
+```python
+class Particle:
+    'Defines a Particle'
+    gravity = 10
+    velocity = {"x": 0, "y": 0}
+    acceleration = {"x": 0, "y": 0}
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def get_complete_coordinates(self):
+        'Prints the coordinates set'
+
+        print("(" + str(self.x) + ", " + str(self.y) + ")")
+
+    def move(self):
+        'Moves the particle around'
+
+        pass
+
+    def add_force(self, force):
+        'Adds external forces'
+
+        pass
+```
+
+This is similar to the Point Object. It uses coordinates and can display them in the console.
+
+So why don't we reuse the Point class? We can do it via **Inheritance**.
+
+For instance, let's import the Point class. You can achieve that by importing `Point` from the file containing its definition.
+
+**Class Inheritance** looks like this.
+
+```python
+from point import Point
+
+class Particle(Point):
+    'Defines a Particle'
+    gravity = 10
+    velocity = {"x": 0, "y": 0}
+    acceleration = {"x": 0, "y": 0}
+
+    def move(self):
+        'Moves the particle around'
+
+        pass
+
+    def add_force(self, force):
+        'Adds external forces'
+
+        pass
+```
+
+This is a simple example, but taking advantage of Inheritance, you can **highly simplify programs and write less redundant code**.
+
+Moreover, you may want to **override certain methods** and implementing a different behavior.
+
+You can do that by simply recreate a method with the same name in the children class.
+
+For example, in here we're overriding `get_complete_coordinates()`:
+
+```python
+from point import Point
+
+class Particle(Point):
+    'Defines a Particle'
+    gravity = 10
+    velocity = {"x": 0, "y": 0}
+    acceleration = {"x": 0, "y": 0}
+
+    def move(self):
+        'Moves the particle around'
+
+        pass
+
+    def add_force(self, force):
+        'Adds external forces'
+
+        pass
+
+    def get_complete_coordinates(self):
+        'Prints the coordinates set'
+
+        print("Particle position = (" + str(self.x) + ", " + str(self.y) + ")")
+```
+
+### Creating instances
+
+Finally, we get to **instantiating the classes and creating objects**.
+
+To do so, you have to import the class first. Then, you can create a reference like so:
+
+```python
+from particle import Particle
+
+particle = Particle(1, 1)
+particle.get_complete_coordinates()
+```
+
+This particular code snippet would print "Particle position = (1, 1)" in console.
+
+## Conclusion
+
+OOP let us create **large and scalable programs**, understanding it means taking a big step in code readability and reusability.
+
+This concept is also the same throughout any OOP programming languages, with some minor exceptions.

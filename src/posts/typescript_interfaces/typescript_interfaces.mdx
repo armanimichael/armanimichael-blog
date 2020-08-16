@@ -1,0 +1,148 @@
+---
+title: TypeScript Interfaces
+crawlerTitle: TypeScript - Interfaces
+description: Interfaces are part of OOP, they let you create custom Types you can later assign to variables, functions, and classes.
+keywords: 'TypeScript, JavaScript, TypeScript Interfaces'
+excerpt: Define your own Types with interfaces.
+slug: /typescript-interfaces/
+date: 2020-06-20
+category: TypeScript
+---
+
+## What are Interfaces?
+
+**Interfaces let you define a structure** and apply it to either a function, a class, or a single variable.
+
+Different from a function, or a class, an **interface describes how something looks** rather than defining how it works.
+
+[TypeScript's](/category/typescript/) primary objective is **defining types**; interfaces let you create more advanced ones starting from the primitives.
+
+## Give me an example
+
+Let's suppose you have a function accepting an argument named company, such as the one below.
+
+```typescript
+function displayCompanyInfo(company) {
+  return `Welcome to ${company.name}, there're ${company.employees.length} people working here!`;
+}
+```
+
+In TypeScript, the **argument will automatically be of type any if not specified.**
+
+We know that the argument is an object and should contain a couple of properties. Let's suppose the object accepted by the function looks like this.
+
+```typescript
+const company = {
+  name: 'Somename',
+  employees: ['John', 'Michael', 'Giulia'],
+};
+```
+
+There isn't any primitive type to represent this data. What we can do is creating an interface that describes it.
+
+```typescript
+interface Company {
+  name: string;
+  employees: string[];
+}
+```
+
+The syntax is rather simple. We need to define a list of properties and declaring their types.
+
+You can now rewrite the example before like so:
+
+```typescript
+interface Company {
+  name: string;
+  employees: string[];
+}
+
+function displayCompanyInfo(company: Company) {
+  return `Welcome to ${company.name}, there're ${company.employees.length} people working here!`;
+}
+```
+
+Passing an object with a different structure will throw an error.
+
+## About naming conventions
+
+If you come from other programming languages, you may be used to naming interfaces starting with a capital I → `ICompany`.
+
+However, [TypesScript coding guidelines ](https://github.com/basarat/typescript-book/blob/master/docs/styleguide/styleguide.md#interface) discourage doing so. **You should use camel-case with the first letter capitalized** → `Company`.
+
+## Optional and Readonly Properties
+
+Moreover, it's possible to define optional properties, as some exist only under other conditions, or you only need to work with a bunch of them.
+
+The syntax is the following:
+
+```typescript
+interface SomeInterface {
+  optional?: string;
+}
+```
+
+If you want to make sure you can't alter the properties after you defined the object, you can set a property to read-only.
+
+```typescript
+interface SomeInterface {
+  readonly cantAlterThis: string;
+}
+```
+
+The same applies to Arrays with a special type. This makes the Array **immutable**.
+
+```typescript
+interface SomeInterface {
+  cantAlterThese: ReadonlyArray<string>;
+}
+```
+
+## Function Types
+
+Interfaces can also describe functions. You can define arguments and return types.
+
+```typescript
+interface PersonFunction {
+  (name: string, lastname: string): () => string;
+}
+
+let greet: PersonFunction;
+greet = function(name, lastname) {
+  return `Hello ${name} ${lastname}`;
+};
+```
+
+By doing this, there's no need to specify the function arguments and return type, as they're already defined inside the interface.
+
+## Indexable Types
+
+At last, let's talk about indexable types.
+
+By using indexable types, you can specify what type is the index to access a specific record into the object.
+
+For example, a string array will look like this.
+
+```typescript
+interface StringArray {
+  [index: number]: string;
+}
+
+const list: StringArray = ['Something', 'Something else'];
+```
+
+You can define it using a string as index.
+
+```typescript
+interface StringArray {
+  [index: string]: string;
+}
+```
+
+The only two types supported for index signatures are `number` and `string`.
+
+## Conclusions
+
+I could talk about interfaces applied to classes. However, I feel like it makes more sense to talk about that in [a post about classes and inheritance](/typescript-classes/).
+
+For now, we'll stick with simpler interfaces.

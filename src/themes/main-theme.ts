@@ -2,31 +2,31 @@ import { DefaultTheme } from 'styled-components';
 
 const mainTheme: DefaultTheme = {
   paragraph: {
-    primary: '#b8c1ec',
-    secondary: '#232946',
+    primary: '#a7a9be',
+    secondary: '#2e2f3e',
   },
 
   headline: {
     primary: '#fffffe',
-    secondary: '#232946',
+    secondary: '#0f0e17',
   },
 
   button: {
-    primary: '#eebbc3',
-    primaryColor: '#232946',
+    primary: '#ff8906',
+    primaryColor: '#fffffe',
     secondary: '',
     secondaryColor: '',
   },
 
   backgrounds: {
-    primary: '#232946',
-    secondary: '#d4d8f0',
+    primary: '#0f0e17',
+    secondary: '#fffffe',
   },
 
   card: {
     background: '#fffffe',
-    paragraph: '#232946',
-    heading: '#232946',
+    paragraph: '#000000',
+    heading: '#ff8906',
   },
 
   linearGradients: {

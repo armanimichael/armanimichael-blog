@@ -56,9 +56,13 @@ const Navbar: React.FC<NavbarProps> = ({
       navbarElementsWidth += navbarElements[i].clientWidth;
     }
 
-    setMenuSize(
-      navbar.clientWidth - (logo.clientWidth + 100) < navbarElementsWidth
-    );
+    if (logo) {
+      setMenuSize(
+        navbar.clientWidth - (logo.clientWidth + 100) < navbarElementsWidth
+      );
+    } else {
+      setMenuSize(navbar.clientWidth < navbarElementsWidth);
+    }
   };
 
   return (

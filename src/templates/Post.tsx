@@ -25,7 +25,7 @@ const Post: React.FC<Props> = ({ data: { mdx } }) => (
         }
         description={mdx.frontmatter.description}
         keywords={mdx.frontmatter.keywords}
-        // ! No Social Image
+        image={mdx.frontmatter.category.toLowerCase() + '.jpg'}
       />
     }
   >

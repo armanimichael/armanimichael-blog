@@ -30,13 +30,14 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a, p, li, ul, ol, td, th {
-    font-size: 18px;
+    font-size: 22px;
     line-height: 1.6em;   
     color: ${props => props.theme.paragraph.primary};
   }
 
   h1, h2, h3, h4, h5, h6 {    
     color: ${props => props.theme.headline.primary};
+    line-height: 1.6em;
   }
 
   h1 {
@@ -81,6 +82,18 @@ const GlobalStyle = createGlobalStyle`
     & > h5,
     & > h6 {
       width: 100%
+    }
+
+    & p {
+      margin: 4px 0 14px 0;
+    }
+
+    & h2, h3, h4 {
+      margin: 24px 0 0 0;
+    }
+
+    & li {
+      margin-bottom: 12px;
     }
   }
 
@@ -183,6 +196,14 @@ const GlobalStyle = createGlobalStyle`
   .CookieConsent {
     z-index: 10000 !important;
     font-size: 18px;
+    
+    & > div {
+      margin: 6px !important;
+    }
+
+    & a {
+      font-size: 18px;
+    }
   }
 
   @media all and (max-width: 800px) {
@@ -196,8 +217,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h3 {
-      font-size: 20px;
-      margin: 20px 0;
+      font-size: 24px;
+      margin: 20px 0 0 0;
     }
 
     main {
@@ -208,7 +229,7 @@ const GlobalStyle = createGlobalStyle`
 
     main.general-content {
       box-sizing: border-box;
-      padding: 0 20px;
+      padding: 0 10px;
     }
 
     section.socials {

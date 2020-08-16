@@ -1,0 +1,71 @@
+---
+title: Client-side Rendering vs Server-side Rendering
+crawlerTitle: Client-side Rendering vs Server-side Rendering
+description: Client-side vs server-side rendering - what's the difference? SEO impacts, loading times, efficiency, accessibility, and use cases.
+keywords: Server, Server Side Rendering, Client Side Rendering, Client
+excerpt: What's the difference between CSR and SSR and which one we should use.
+slug: /client-side-vs-server-side-rendering/
+date: 2019-10-09
+category: Web Dev
+---
+
+## Introduction
+
+Since the first Websites started appearing on the Internet, the most used method to build them has been Server-side Rendering (SSR). However, during the last decade, a new approach grew popular - Client-side Rendering (CCR).
+
+Let's get into these techniques and their differences.
+
+## Server-side Rendering
+
+SSR works by taking requests from the end-user, **generating an HTML page on the server**, and sending it to the browser. In other words, the server gets a new request each time you reload or request a new page. It doesn't matter if the new page has the same layout, or it's similar to the previous one.
+
+This unequivocally leads to a **lot of traffic** to handle.
+
+The most commonly used Server-side Language is probably **PHP**, despite **NodeJS**, **C#**, and other languages are slowly taking the lead.
+
+Because the HTML file is already populated, **SEO is easily implementable** on each page. Web crawlers can see the page content right away.
+
+### Pros of SSR
+
+- Best option for **SEO.**
+- The **initial load** is a lot **faster.**
+- Doesn't require JavaScript to run correctly.
+- Can **effortlessly communicate** with **databases** (on CSR the source-code is public, we'd need an API in the middle).
+- Most suitable for **static websites**.
+
+### Cons of SSR
+
+- **Time To First Byte (TTFB)** is **higher** - bigger files**.**
+- **More traffic**, you'd need a server upgrade for handling more users.
+- **Higher cost**.
+- Less website interactivity (**static pages**).
+- Page **reloads** for every **new page requested**.
+- Problematic for slower Internet connections.
+
+### Client-side Rendering
+
+Differently, CSR relies mostly on **JavaScript**. When the end-user lands on a client-side rendered website, the server sends to the browser an **empty HTML file** linked to a specific JavaScript file.
+
+Instead of rendering the page on the server, JavaScript computes the page on the browser.
+
+The **loading time will be longer**, but the downloaded **file is smaller**.
+
+As CSR works directly on the browser, you can design engaging and accessible ways to **interact** with the user.
+
+Above all, the most known CSR libraries at the moment are **Angular**, [React](/react-for-beginners/)**, and Vue.**
+
+In **CSR**, the page sent by the server is like a **template**, it gets **populated dynamically** by **JavaScript**: this is what we refer to as **dynamic web pages**.
+
+### Pros of CSR
+
+- **Time To First Byte (TTFB)** is **lower** - smaller files.
+- **Easier to implement.** It uses client-side technologies, no need to manage the server.
+- There're lots of powerful **JavaScript libraries**.
+- More user interactions.
+
+### Cons of CSR
+
+- **Worst** option for **SEO optimization**: the page appears **blank** to any **search engine**.
+- **JavaScript needs to be allowed** on the browser.
+- **Can't communicate directly with a** **Database,** secrets would be publicly available.
+- The **initial load** can be **heavier** - lots of JavaScript code to run.

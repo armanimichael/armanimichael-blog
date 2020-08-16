@@ -1,33 +1,49 @@
 import React from 'react';
+import { graphql, PageProps } from 'gatsby';
 
-import { ServiceCard, Contact, Address } from '../components/';
-import { Layout, Socials, Section, OpeningHours, Infos } from '../containers/';
+import { PageButtons, PostsList } from '../components';
+import { Layout } from '../containers';
 
-const IndexPage: React.FC = () => (
-  <Layout showHero allowPadding={false}>
-    <Socials />
-    <Infos>
-      <section>
-        <Contact type="phone" value="999 9999999" />
-        <Contact type="social" value="FB Messenger" />
-        <Contact type="mail" value="some@mail.com" />
-      </section>
-      <Address>
-        <p>Something Street 99</p>
-        <p>Some place, Earth</p>
-      </Address>
-    </Infos>
+interface Props extends PageProps {
+  data: {
+    allMdx: { edges: string[]; totalCount: number };
+  };
+}
 
-    <OpeningHours />
-    <Section title="Services">
-      <ServiceCard />
-      <ServiceCard />
-      <ServiceCard />
-      <ServiceCard />
-      <ServiceCard />
-      <ServiceCard />
-    </Section>
+const IndexPage: React.FC<Props> = ({
+  data: {
+    allMdx: { edges, totalCount },
+  },
+}) => (
+  <Layout>
+    <PostsList edges={edges} />
+    <PageButtons
+      previous={totalCount > 10}
+      latest={false}
+      pageNumber={0}
+      totalPages={totalCount}
+    />
   </Layout>
 );
 
 export default IndexPage;
+
+export const postsListQuery = graphql`
+  {
+    allMdx(sort: { order: DESC, fields: frontmatter___date }, limit: 10) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            slug
+            date
+            category
+            excerpt
+          }
+        }
+      }
+      totalCount
+    }
+  }
+`;

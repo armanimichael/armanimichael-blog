@@ -52,16 +52,17 @@ const FooterStyled = styled.footer`
 `;
 
 const Logo = styled.div<LogoProps>`
-  width: 100%;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   background: ${props => props.backgroundColor || 'transparent'};
   background-image: url(${props => props.image});
   background-position: center;
-  background-size: 80%;
+  background-size: contain;
   background-repeat: no-repeat;
 
   @media all and (max-width: 800px) {
-    background-size: contain;
+    width: 50px;
+    height: 50px;
     border: 4px solid ${props => props.backgroundColor || 'transparent'};
   }
 `;

@@ -1,0 +1,126 @@
+---
+title: Smooth Sentences
+crawlerTitle: Smooth Sentences Problem in C#
+description: A smooth sentence is one where the last letter of each word is identical to the first letter the following word.
+keywords: Programming problem, problem solving, C#
+excerpt: A simple problem from edabit.com
+slug: /smooth-sentences-problem/
+date: 2020-04-25
+category: Problem Solving
+---
+
+## Introduction
+
+I found this simple problem online. I throught it would be a great example of how to use Arrays and `string` methods. In particular I'm using C#.
+
+## The Problem
+
+[You can find the problem here](https://edabit.com/challenge/SkY5Nw3rS7WvkQmFc). The program I'm writing is supposed to tell if a sentence passed as input is a Smooth Sentence.
+
+### What is a Smooth Sentence?
+
+A smooth sentence is a sentence where the last letter of each word is identical to the first letter of the following word.
+
+## Explanation
+
+Firstly, we have to find a way to get every single word from the input sentence.
+
+We can do that with the `Split()` method, which returns an **Array of** `strings`. This method accepts a `string` argument, the `separator`.
+
+In this case, we can separate each word from the sentence by using a **blank space** as the separator.
+
+Let's write the first part of the method.
+
+```csharp
+public static bool IsSmooth(string sentence)
+{
+    string[] sentences = sentence.Split(' ');
+}
+```
+
+Next, we have to check if the last character of the initial word and the first character of the previous word are equal.
+
+To do so, we need a loop going **from** **0 to the length of the array - 1**. The -1 ensures we never get out of the Array's boundaries.
+
+```csharp
+for (int i = 0; i < sentences.Length - 1; i++)
+{
+    ...
+}
+```
+
+We'll also need to find the two characters we need to check against each other.
+
+The `Substring()` method, lets us take part in a `string`, for instance, we're taking the last `char` of the initial word
+
+```csharp
+previousWord.Substring(previousWord.Length - 1)
+```
+
+and the first `char` of the following word.
+
+```csharp
+followingWord.Substring(0, 1)
+```
+
+Then, we can convert the substrings to characters using `Char.parse()`.
+
+```csharp
+string previousWord = sentences[i];
+char lastChar = Char.Parse(previousWord.Substring(previousWord.Length - 1));
+
+string followingWord = sentences[i + 1];
+char firstChar = Char.Parse(followingWord.Substring(0, 1));
+```
+
+Finally, we can check if the two words follow the rules of the problem.
+
+If we return `false` as soon as any word fails the test, we can make sure the program doesn't go through the loop
+pointlessly.
+
+If the method doesn't `return` before the end of the loop, we can return `true`.
+
+## Tweaks and fixes
+
+To avoid crashes, we should make sure that the sentence doesn't start nor end with white spaces. It's possible to do that using `Trim()`.
+
+Moreover, the check we're performing on the characters is **case-sensitive** so, we should convert the sentence to lower case with `ToLower()`.
+
+At the end, if the sentence contains less than one character, we should return `false`.
+
+```csharp
+if (sentence.Length <= 1) return false;
+```
+
+## Solution
+
+```csharp
+public static bool IsSmooth(string sentence)
+{
+    sentence = sentence.Trim().ToLower();
+    string[] sentences = sentence.Split(' ');
+
+    if (sentence.Length <= 1) return false;
+
+    for (int i = 0; i < sentences.Length - 1; i++)
+    {
+        string previousWord = sentences[i];
+        char lastChar = Char.Parse(previousWord.Substring(previousWord.Length - 1));
+
+        string followingWord = sentences[i + 1];
+        char firstChar = Char.Parse(followingWord.Substring(0, 1));
+
+        if (lastChar != firstChar) return false;
+    }
+
+    return true;
+}
+```
+
+```csharp
+IsSmooth("Marta appreciated deep perpendicular right trapezoids") ➞ true
+
+IsSmooth("Someone is outside the doorway") ➞ false
+
+IsSmooth("She eats super righteously") ➞ true
+```

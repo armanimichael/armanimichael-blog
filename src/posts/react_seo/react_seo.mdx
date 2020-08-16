@@ -1,0 +1,196 @@
+---
+title: 3 Ways to improve SEO in React
+crawlerTitle: React – 3 Ways to improve SEO
+description: React doesn't come with SEO Friendly capabilities. Let's see what we can do to improve React SEO, using tools such as Gatsby, NextJS, and more.
+keywords: React, SEO, React SEO, React Helmet, GatsbyJS, NextJS
+excerpt: Tools and techniques for improving SEO.
+slug: /reactjs-seo/
+date: 2020-02-16
+category: React
+---
+
+## JavaScript and its impact on SEO
+
+**React uses JavaScript** (or TypeScript) to render components. However, this approach is **not SEO friendly** by default.
+
+Despite Google taking large steps into indexing JavaScript generated pages, we still **can't depend on Client-Side Rendered pages** to improve our site's position on every Search Engine.
+
+To clarify Search Engines see your React Apps as a blank page, you can verify this by inspecting the page source on any browser. You would see something like this:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script src="/static/js/bundle.js"></script>
+    <script src="/static/js/0.chunk.js"></script>
+    <script src="/static/js/main.chunk.js"></script>
+  </body>
+</html>
+```
+
+As you can see, there is no useful SEO information or content of any kind: this is just an empty skeleton.
+
+## SEO Meta Tags
+
+In HTML, **Meta Tags provide useful information about the Website**. Meta Tags generate **Metadata**, which doesn't appear on any visible page.
+
+Web Crawlers can read this data, gaining more knowledge about your Website and its content.
+
+Note that these Tags go inside the `<head>` tag.
+
+The most important **Meta Tags for SEO** are probably: **description, title, keywords, and viewport**. Let's see what're their use cases:
+
+```html
+<!-- Here's a little - Example  -->
+<head>
+  <title>Why can't dogs talk?</title>
+  <meta name="description" content="This is why dogs don't talk." />
+  <meta name="keywords" content="dogs, animals, pets" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+```
+
+There’re other useful Meta Tags, as well as some we should avoid.
+
+For instance, we can use Meta Tags to specify **Socials** behavior when you **share a link** to any of your pages. You can create ad-hoc headings, descriptions and attaching images.
+
+You can find all of these Meta Tags on [Open Graph](https://ogp.me/), but essentially, the most important ones are the following. Twitter uses the `twitter:` prefix instead of `og:`.
+
+#### Title
+
+```html
+<meta property="og:title" content="Why can't dogs talk?" />
+```
+
+#### Description
+
+```html
+<meta property="og:description" content="This is why dogs don't talk." />
+```
+
+#### Image
+
+```html
+<meta property="og:image" content="http://talkingdogs.example.com/cool-dog.jpg" />
+```
+
+#### Url
+
+```html
+<meta property="og:url" content="http://talkingdogs.example.com/" />
+```
+
+I’m not going to get more specific, as this article is not about socials, but in short, this is a good practice to use socials efficiently.
+
+### Adding Meta Tags to your React App
+
+Nonetheless, adding Meta Tags inside the HTML file directly, is not efficient.
+
+For example, we could have **multiple routes**. In this case, we can use [react-router](https://www.npmjs.com/package/react-helmet), an easy-to-use package that lets you **dynamically inject Meta Tags inside your page**.
+
+```shell
+npm install react-helmet
+```
+
+For example, let's build an **SEO Component**.
+
+```jsx
+import React from 'react';
+import { Helmet } from 'react-helmet';
+ 
+export default ({ title, description, keywords, viewport }) => (
+  <Helmet>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="viewport" content={viewport} />
+  </Helmet>
+);
+```
+
+## Accessibility
+
+**Creating an elegant Website is not enough for SEO**, your  **content must be clean, concise, and readable**. You have to use headers, sub-headers, images, text, and other  **HTML Semantic Elements correctly**. Bear in mind that some users could use **screen readers**  so,  **managing HTML Semantic Elements improperly can severely harm your Website usability.**
+
+### Headings
+
+Firstly, your page should  **only have one  `h1`  element**, and  **the document should contain words related to the title**. In contrast with  `h1`, every  **other subheading tags,**  such as **`h2`, can appear multiple times**.
+
+**Using headings accurately can significantly improve your SEO performance, as Web Crawlers can figure out your page structure.**
+
+### Page language
+
+Specifying your Website language is also crucial both for correct indexing and screen readers.
+
+```html
+<html lang="en">
+```
+
+
+### Images and Links
+
+In order to  **provide extra information about an anchor link**, you can use  the  `title`  attribute. This info is visible as a  **tooltip** when you hover the link.
+
+```html
+<a href="https://www.dogs.example.com/shop" title="Go to the shop">Visit our Website Shop!</a> 
+```
+
+You can write an alternative text for an image using `alt`, which is visible when the image can't load, or read by screen readers.
+
+```html
+<img src="dog.png" alt="My dog"> 
+```
+
+## Server-side Rendering
+
+While talking about the importance of HTML Semantic Elements, I haven’t clarified that they make no difference when building a **Client-side App**.
+
+As I explained before, by default, a **React App renders on the client**. Thus, headings, text, and other elements are inexistent for Web Crawlers. The best option for **optimizing a React App** is to **prebuild** it or **render it directly on the Server**. If you want to know more about Client-side and Server-side rendering, I wrote a [specific article](/client-side-vs-server-side-rendering/) about that.
+
+There are **different approaches to SSR**, you could theoretically implement your system on **any server-side language**, but it’s usually easier to do it in **NodeJS**.
+
+In this article, I’m going to talk about two libraries: [NextJS](https://nextjs.org/) and [GatsbyJS](https://www.gatsbyjs.org/).
+
+Another way to optimize your React Apps for SEO is **prerendering**. When using prerendering, your App appears the same for end-users, but it gets optimized, by an external service, **only when a request comes from a Web Crawler**.
+
+Commonly used Hosting Systems, like [Netlify](https://www.netlify.com/), have a specific option for **prerendering**. If you prefer to manage the Hosting by yourself, and only focus on prerendering, you can check [Prerender.io](https://prerender.io/) out.
+
+
+### NextJS
+
+**NextJS is a React Framework** for Server Side Rendered Pages, built on top of a NodeJS environment. This framework offers different advantages:
+
+-   **Server-side Rendering and Static Pages generation**: you can build dynamic pages and hosting them on a NodeJS server, or fully static HTML files.
+-   **Hot Code Reloading**: NextJS reloads the page any time you save.
+-   **Auto Routing**: pages’ URLs coincide with their position in the **filesystem**.
+-   **Automatic code splitting**: makes the execution faster by avoiding unused libs and code.
+-   **TypeScript support**
+-   **Serverless Routing**
+
+Moreover, NextJS is maintained by Zeit Now so, you can start a new project on their platform surprisingly quickly.
+
+### GatsbyJS
+
+**GatsbyJS** is a React Framework for **Static Pages Generation,** meaning you don’t have to worry about any Backend configuration. It’s heavily based on [GraphQL](https://graphql.org/), a query language for APIs. This framework offers other advantages compared to **NextJS**:
+
+-   **Static Pages Generation**
+-   **Fast and Optimized**
+-   **Good documentation**: the documentation and tutorials are complete and easy to follow.
+-   **Images Optimization Plugin and plugins in general**: there are tens of GatsbyJS plugins, and you can create your own.
+-   **Progressive Web App**  **Support**: GatsbyJS offers total **PWA** support, optimizing data loading, and it is possible to create **offline** Apps;
+-   **GraphQL**: GraphQL lets you effortlessly work with APIs and large quantities of data.

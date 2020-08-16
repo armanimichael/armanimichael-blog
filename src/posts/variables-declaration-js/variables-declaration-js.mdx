@@ -1,0 +1,146 @@
+---
+title: A talk about Variable Declaration in JS/TS
+crawlerTitle: A talk about Variable Declaration in JS/TS
+description: What's the difference between var, let and const in JavaScript? Learning about scopes can help you out figure out how to correctly declare variables.
+keywords: 'TypeScript, JavaScript, Variable declaration'
+excerpt: Learn more about Variable declaration in JS / TS
+slug: /variables-declaration-js/
+date: 2020-06-19
+category: JavaScript
+---
+
+## Where it all began
+
+[JavaScript](/category/javascript/) has been around since **1995**. That's certainly a long time for a programming language to be around.
+
+However, this does not mean it lacks problems.
+
+**JavaScript is the only client-side language that works on every single browser**, which means that compatibility is a must.
+
+ECMAScript standards helped this language grow, following several rules we're all used in other programming languages.
+
+One of these standards is how **scopes** work.
+
+## The use of var
+
+Before **ECMAScript 2015**, the `var` keyword was the only way to declare variables.
+
+But where was the problem?
+
+Well, when using `var`, we're only using two types of scope: **Global Scope** and **Function Scope**. You're most likely familiar with these two terms.
+
+A **Global Variable** is a variable declared outside of any function. It's **accessible from anywhere** within your JavaScript program.
+
+```JavaScript
+// Global Variable
+
+var text = 'Something';
+
+// text is accessible here
+
+function DoSomething() {
+    // text is also accessible here
+}
+```
+
+On the other hand, a **Function Variable** is a variable declared inside a function and **accessible solely inside that function**.
+
+```JavaScript
+// Function Variable
+
+function DoSomething() {
+    var text = 'Something';
+
+    // text is accessible here
+}
+
+// Using text here will create an error!
+// ReferenceError: text is not defined
+```
+
+Function variable can also work this way, which is also what we should avoid as it's kind of confusing:
+
+```JavaScript
+// Function Variable
+
+function DoSomething() {
+    if (true) {
+        var text = 'Something';
+
+        // text is accessible here
+    }
+
+    // text is accessible here
+}
+
+// Using text here will create an error!
+// ReferenceError: text is not defined
+```
+
+## What about let and const?
+
+With the introduction of `let` and `const`, JavaScript gained the ability to understand block scopes.
+
+What is a scope, you may ask? **A scope is anything between two curly brackets.**
+
+```javascript
+{
+  // Hello there, I'm a scope!
+}
+
+{
+  // This is another scope.
+}
+```
+
+Using block scopes is natural in almost every programming language. It reduces confusion and makes the code more readable.
+
+### Let
+
+The `let` keyword is similar to var. The only exception is that it allows block scoping. Let's take the second example from above and convert it using `let`.
+
+```javascript
+// let use
+
+function DoSomething() {
+  if (true) {
+    let text = 'Something';
+
+    // text is accessible here
+  }
+
+  // Using text here will create an error!
+  // ReferenceError: text is not defined
+}
+
+// Using text here will create an error!
+// ReferenceError: text is not defined
+```
+
+You can see how calling `text` outside of the `if` scope cause an error.
+
+### Const
+
+The `const` keyword defines a constant, which can't be re-declared and, it read-only. Note that constants are not immutable. You can still edit objects and arrays.
+
+Apart from that, it follows the **same scoping rules as** `let`.
+
+```javascript
+const PI = 3.14;
+
+PI = 2; // Error, you can't reassign a variable value
+```
+
+By default, you should stick with `const` when programming. If you need to reassign the variables, you can change the keyword to `let`.
+
+This helps to avoid errors.
+
+## In brief, should I use var?
+
+The var keyword **can lead to unexpected behaviors**. You should **avoid it if possible**, especially when working with [TypeScript](/category/typescript/).
+
+Keep in mind, knowing about var is fundamental, as it is a core JavaScript feature still supported by every browser.
+
+## Conclusions
+
+This post serves as an additional explanation material from my posts about [TypeScript](/category/typescript/). Moreover, this topic is important when talking about JavaScript in general.

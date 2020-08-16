@@ -1,0 +1,138 @@
+---
+title: JavaScript Promises
+crawlerTitle: JavaScript - How to loop Arrays
+description: Excaping callback hell in JavaScript, learn to create and catch Promises. When to avoid callbacks and use the Promise API, a powerfull way to catch asynchronous methods.
+keywords: JavaScript, Promises, Async JavaScript
+excerpt: Let's get out of callback hell.
+slug: /javascript-promises/
+date: 2020-05-21
+category: JavaScript
+---
+
+## Callback hell
+
+In JavaScript, we're used to callbacks. Callbacks are essential and easy to use when we work **asynchronously**. The function we need will execute as soon as a specific event is triggered. Easy enough, isn't it?
+
+However, when our scripts start to grow, we can find ourselves in what's called **callback hell**.
+
+This happens when we call numerous callbacks one inside another. The code flow is **unreadable** and **unmaintainable**.
+
+## Promises
+
+Promises let you work with asynchronous methods, without the problem described above.
+
+Promises are described as a **proxy for a value not necessarily known when the promise is created**.
+
+A Promise is in one of these states:
+
+- **pending**: initial state, neither fulfilled nor rejected.
+- **fulfilled**: meaning that the operation completed successfully.
+- **rejected**: meaning that the operation failed.
+
+As soon as we call a Promise, it will stay in its **pending state** until the caller function is done. After that, it will return either a Promise in a **fulfilled** or **rejected** state.
+
+### Creating a Promise
+
+The **Promise API** provides a constructor accepting an **executor**, an anonymous function.
+
+The executor consists of two function arguments, one for the fulfilled state and one for the rejected state.
+
+The executor should call only one resolve or one reject. Any state change is final. All additional calls of resolve or/and reject are ignored.
+
+```javascript
+const examplePromise = new Promise((resolve, reject) => {
+  resolve('Promise fulfilled!');
+
+  // The code underneath won't run as we already called resolve above
+  reject('...')
+});
+```
+
+For example, we can check if a specific condition is fulfilled, an event is called, and so on.
+
+```javascript
+const examplePromise = new Promise((resolve, reject) => {
+  // The condition variable should be declared somewhere
+  if (condition) {
+      resolve('Promise fulfilled!');  
+  } else {
+      reject('Something went wrong!')
+  }
+});
+```
+
+Let's get more specific, we can detect when a new image is correctly loaded. As you can see, the resolve and reject functions are binded to the images events.
+
+The `url` value is passed to the functions, as soon as we consume this promise we can easily access it. 
+
+```javascript
+const loadImage = url => (
+  new Promise((resolve, reject) => {
+    const image = new Image();
+    image.src = url;
+
+    image.onload = () => resolve(url);
+    image.onerror = () => reject(url);
+  })
+);
+```
+
+### Consuming a Promise
+
+You've probably seen how to consume a Promise already. For instance, the [fetch API](/reactjs-fetch-data-from-apis/) works with promises.
+  
+The concept behind consuming Promises is easy enough. The syntax uses three keywords:
+
+-   **then**: Promise fulfilled.
+-   **catch**: Promise rejected.
+-   **finally**: called in any case.
+
+In practice, let's consume the example created before:
+
+```javascript
+loadImage(treeImg)
+  .then(url => {
+    console.log(`Succesfully loaded the url: ${url}`);
+  })
+  .catch(url => {
+    console.log(`Can't load image source: ${url}`);
+  });
+```
+
+### Chained Promises
+
+Promises can return other promises. In this case, we have a **chain of Promises.**
+
+The value returned by each promise is passed to the following consumer.
+
+For example:
+
+```javascript
+const chainedPromises = new Promise((resolve, reject) => {
+  resolve(1);
+});
+
+chainedPromises
+  .then(num => {
+    console.log(num); // 1
+    return num + 1;
+  })
+  .then(num => {
+    console.log(num); // 2
+    return num + 2;
+  })
+  .then(num => {
+    console.log(num); // 4
+
+    return Promise.reject(num + 3);
+  })
+  .catch(err => {
+    console.log(err); // 7
+  });
+```
+
+## Considerations
+
+Knowing how to use Promises can significantly improve code readability, as well as understanding how many libraries and APIs out there work.
+
+Promises are **essential for asynchronous programming**. This means that they work great with libraries such as [React](/category/react/) and environments like [NodeJS](/category/nodejs/).

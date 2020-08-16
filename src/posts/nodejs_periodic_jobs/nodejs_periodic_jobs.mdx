@@ -1,0 +1,122 @@
+---
+title: NodeJS – Running Jobs Periodically
+crawlerTitle: NodeJS – Running Jobs Periodically
+description: How to run NodeJS commands over time. Using methods such as setInterval, or running more precise and consistent events with node-cron.
+keywords: NodeJS, Server, Cron-jobs, node-cron
+excerpt: How to run NodeJS commands over time.
+slug: /nodejs-running-jobs-periodically/
+date: 2019-10-05
+category: NodeJS
+---
+
+## The Problem
+
+While creating a **NodeJS server**, you may have encountered situations where you have to execute particular actions over time, **running jobs periodically**.
+
+It is possible to tackle this problem in several **distinct ways**: let's take a look at some of them.
+
+## Using JavaScript – setInterval
+
+Immediately, one of the resolutions would be using the **setInterval** function, running an action every set amount of time.
+
+Although being easily implemented, this method comes with some **pitfalls**:
+
+- It begins as soon as the program runs, which makes setting a **different starting time** a lot more complicated.
+- It will eventually run **out of sync**, making **perfectly timed** events impossible.
+- The interval time is in **milliseconds**. You can't specify a **distinct timestamp**.
+
+Using **setInterval** is the easiest way to solve this problem, considering you don't need that much **control** over it.
+
+The **syntax** for **setInterval** is the following. You have to pass a **callback** and an **integer** corresponding to the number of **milliseconds** between every execution.
+
+```javascript
+// 1 second interval
+const MILLISECONDS = 1000;
+
+const interval = setInterval(() => {
+  console.log('Job Executed!');
+}, MILLISECONDS);
+```
+
+You can **stop the interval** by using the `clearInterval()` method. Therefore, you must use a variable to keep track of the interval, as seen above.
+
+```javascript
+clearInterval(interval);
+```
+
+## Using Cron Jobs
+
+**Cron jobs** are a utility found in **Unix-like** operating systems. They provide a useful way to **schedule events** and running commands over time.
+
+In our case, we would like to implement this service **generically** on a **NodeJS** **server** running **jobs periodically** on any **OS**.
+
+As a result, **node-cron** (an NPM package) comes in handy. This package uses the cron syntax to run tasks over time in pure JavaScript.
+
+Using node-cron offer many **advantages**:
+
+- t uses **less memory**, resulting in a lightweight method to implement on a server.
+- It maintains its **sync** with the **local server time**, providing well-timed events.
+- You can have **more control** over every action **tick**: you could run an action every 5 minutes, specifically on Monday, every minute 1, 4, 8, etc.
+- You can set the **timezone**.
+
+Before setting up this method, you need to install the node package in your project.
+
+```shell
+npm install node-cron
+```
+
+The syntax for node-cron it's more complicated than other methods, but it doesn't take long to understand.
+
+## Supported options
+
+```
+ # ┌────────────── second (optional)
+ # │ ┌──────────── minute
+ # │ │ ┌────────── hour
+ # │ │ │ ┌──────── day of month
+ # │ │ │ │ ┌────── month
+ # │ │ │ │ │ ┌──── day of week
+ # │ │ │ │ │ │
+ # │ │ │ │ │ │
+ # * * * * * *
+```
+
+## Basic syntax
+
+### Running Tasks every minute
+
+```javascript
+// Importing the package
+const cron = require('node-cron');
+
+// Creating a schedule
+cron.schedule('* * * * *', () => {
+  console.log('Running every minute');
+});
+```
+
+### Running Tasks every set amount of time
+
+All you have to do is using this syntax `*/TIME`, you can also separate values with **commas**, and creating **ranges** with –, for instance:
+
+```javascript
+cron.schedule('2,4,5 */1 * * *', () => {
+  console.log('Running every 1 hour and from minutes 2, 4, 5');
+});
+```
+
+### Using names
+
+You can also use common **English names** for **days of the week** and **months**:
+
+```javascript
+cron.schedule('* * * January,September Sunday', () => {
+  console.log('running on Sundays of January and September');
+});
+```
+
+Furthermore, you can change the timezone, start and stop the scheduled tasks, etc. You can check out more on their NPM page.
+
+## Expanding your application
+
+Finally, you could implement **ReactJS** for the **client-side** of your Web App, learn how [here](/react-for-beginners/).

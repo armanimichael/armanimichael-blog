@@ -22,6 +22,8 @@ interface DisableBodyScrollProps {
 interface LogoProps {
   isWrapped: boolean;
   image?: string;
+  size?: number;
+  marginLeft?: number;
 }
 
 // * Styles
@@ -119,7 +121,6 @@ const NavbarWrappedStyled = styled(Navbar)<NavbarProps>`
   box-sizing: border-box;
   justify-content: flex-end;
   align-items: center;
-
   z-index: ${props => (props.isHidden ? 100 : 200)};
 
   /* Overloads Overflow checks if under max-width */
@@ -213,8 +214,11 @@ const ContentWrapped = styled.div<ContentWrappedProps>`
 `;
 
 const Logo = styled(Link)<LogoProps>`
-  min-width: ${props => (props.isWrapped ? '180px' : '300px')};
-  height: 80%;
+  width: ${props => props.size || 65}px;
+  height: ${props => props.size || 65}px;
+  box-sizing: border-box;
+  margin: ${props =>
+    props.marginLeft ? `0 0 0 ${props.marginLeft}px` : '0 20px 0 40px'};
   position: ${props => (props.isWrapped ? 'absolute' : 'relative')};
   left: 0;
   background-image: url(${props => props.image});

@@ -1,0 +1,87 @@
+---
+title: Generate unique keys for React Elements
+crawlerTitle: Generate unique keys for React Elements
+description: React requires you to assign a unique key to any automatically created Element. Learn how to effortlessly and efficiently do it.
+keywords: React, React keys
+excerpt: Assing uniques keys to React Elements.
+slug: /react-unique-keys/
+date: 2020-05-25
+category: React
+---
+
+## What are keys?
+
+In React, when you work with automatically generated Elements and Lists, you must provide a **unique key** to every node you create.
+
+React uses keys to identify which items have changed between renders. As some components may get removed or moved in an array, keys should be **static** as well. When talking about the staticity of a unique key, I mean that it should remain the same between renders.
+
+Moreover, keys must be unique among siblings, so there's no need to have globally unique keys.
+
+## Accessing Components' keys
+
+Keys are only used by React internally. You can't see them explicitly inside your Components. If you want to access a Component's key, simply create a new prop named something else.
+
+Example:
+
+```jsx
+// key is not accessible, however id is and it has the same value.
+<li key={example.id} id={example.id}>
+  {example.item}
+</li>
+```
+
+## Generating unique keys from an array
+
+Suppose you have an array of objects containing employees' data.
+
+Let's wrap their data inside some jsx elements.
+
+### Things you should AVOID
+
+Between every possible method you can use to generate unique keys, this is the less recommended.
+
+For instance:
+
+```jsx
+employees.map((employee, i) => (
+  <div className="card" key={i}>
+    <p>Name: {employee.name}</p>
+    <p>Lastname: {employee.name} </p>
+    <img src={employee.imageSrc} alt={employee.name} />
+  </div>
+));
+```
+
+As you can see, the node's key is the current array index. **You should avoid this method completely!**
+
+As I said before, keys should be **static**. Using an array index means that the key is bound to the element position in the same array.
+
+If the position of an element changes, the keys would not indicate the previous elements.
+
+### What to do instead
+
+Instead of relying on indexes, you should find a way to generate always the same keys.
+
+Fortunately, React comes with many utilities and functionalities. The most elegant and most performant way to create unique keys is using the `React.Children.toArray()` method. This method accepts an array of elements as its only argument.
+
+Let's rewrite the example above:
+
+```jsx
+React.Children.toArray(
+    employees.map((employee, i) => (
+        <div className="card">
+            <p>Name: {employee.name}</p>
+            <p>Lastname: {employee.name} </p>
+        <img src={employee.imageSrc} alt={employee.name} />
+    </div>
+    ));
+);
+```
+
+## Conclusions
+
+The best way to assign unique keys would be to pass them **directly** to a collection. Obviously, that's not always possible.
+
+Other approaches exist, there are some libraries out there doing exactly this.
+
+However, in more general cases, the `React.Children.toArray()` method works flawlessly.

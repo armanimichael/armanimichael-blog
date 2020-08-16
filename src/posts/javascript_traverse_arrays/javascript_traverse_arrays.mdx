@@ -1,0 +1,70 @@
+---
+title: Looping through Arrays in JavaScript
+crawlerTitle: JavaScript - How to loop Arrays
+description: Different methods to traverse Arrays in JavaScript.
+keywords: JavaScript, Array, JavaScript Array, for loop
+excerpt: Various ways to traverse Arrays.
+slug: /javascript-traverse-arrays/
+date: 2020-03-14
+category: JavaScript
+---
+
+JavaScript offers different ways to work with **Arrays**. In this post, I'm going to talk about traversing Arrays, and how to achieve it with different methods.
+
+## For Loop
+
+Let's start with the basic one, the `for` loop.
+
+It's usually the **preferred** one as it's simple to understand, quick to write, and efficient.
+
+```javascript
+const array = [1, 2, 3, 4];
+
+for (let i = 0; i < array.length; i++) {
+  console.log(array[i]);
+}
+```
+
+## For of Loop
+
+The `for...of` loop is similar to the `for` loop. The only exception is the **absence of an index**.
+
+If you need to **iterate over each element** of an Array, this method works out flawlessly.
+
+```javascript
+const array = [1, 2, 3, 4];
+
+for (const element of array) {
+  console.log(element);
+}
+```
+
+## While Loop
+
+Despite being usually applied for other purposes, the `while` loop works just like the `for` loop. It requires **more lines of code**, as it **doesn't handle the index** by itself.
+
+For instance, you could use this method when checking other boolean expressions.
+
+```javascript
+const array = [1, 2, 3, 4];
+
+i = 0;
+while (i < array.length) {
+  console.log(array[i]);
+  i++;
+}
+```
+
+## forEach Method
+
+Differently from the `for` and `for...of` loops, `forEach` is a method.
+
+It is slightly **less performant** than the other loops. Yet, it is great for writing **clean** **and short code**.
+
+It accepts a callback. The **callback** contains the value of the **elements**, its **index**, and the **array** itself.
+
+```javascript
+const array = [1, 2, 3, 4];
+
+array.forEach(element => console.log(element));
+```

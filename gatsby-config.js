@@ -1,10 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Starter Mike',
-    sitename: 'Gatsby Starter Mike',
-    siteUrl: 'localhost:8000',
+    title: 'Armani Michael',
+    sitename: 'Armani Michael',
+    siteUrl: 'https://blog.armanimichael.com',
     description:
-      'Gatsby Starter with TypeScript support, js styling with styled-components and MDX posts',
+      'Software Developer based in Italy. Read more about programming and Web Development on my Blog - I mostly write about React.',
     author: '',
   },
   plugins: [
@@ -50,13 +50,13 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'gatsby-starter-mike',
-        short_name: 'mike-starter',
+        name: 'armani-michael-blog',
+        short_name: 'mike-blog',
         start_url: '/',
         background_color: '#232946',
         theme_color: '#232946',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        icon: 'src/images/logo.png', // This path is relative to the root of the site.
       },
     },
     {
@@ -92,7 +92,10 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        policy: [{ userAgent: '*', allow: '/' }],
+        policy: [
+          { userAgent: '*', allow: '/' },
+          { userAgent: '*', disallow: ['/privacy', '/privacy/'] },
+        ],
       },
     },
     {
@@ -120,27 +123,15 @@ module.exports = {
             const configs = {
               '/': {
                 priority: 1,
-                changefreq: 'yearly',
-              },
-              '/blog/': {
-                priority: 1,
                 changefreq: 'weekly',
               },
             };
 
-            const isBlogPost = /^\/blog\/./.test(pathLink);
             if (!configs[pathLink]) {
-              if (isBlogPost) {
-                return {
-                  priority: 0.7,
-                  changefreq: 'monthly',
-                };
-              } else {
-                return {
-                  priority: 0.7,
-                  changefreq: 'yearly',
-                };
-              }
+              return {
+                priority: 0.7,
+                changefreq: 'monthly',
+              };
             }
 
             return configs[pathLink];
