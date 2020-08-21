@@ -8,20 +8,20 @@ interface CategoryProps {
 
 const Container = styled.div`
   width: calc(50% + 40px);
-  margin: 0px 40px 40px 40px;
+  margin: 0px 40px 0px 40px;
   box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
 
   &:first-child {
-    margin: 40px;
+    margin: 40px 40px 0px 40px;
   }
 
   @media screen and (max-width: 800px) {
     &:first-child {
-      margin: 44px 30px 44px 30px;
+      margin: 44px 30px 0 30px;
     }
 
-    margin: 0px 30px 44px 30px;
+    margin: 0px 30px 0 30px;
     width: 100%;
   }
 `;
@@ -47,8 +47,8 @@ const PostStyled = styled(Link)`
 
 const Category = styled(Link)<CategoryProps>`
   display: block;
+  width: calc(50% + 40px);
   text-decoration: none;
-  width: 100%;
   box-sizing: border-box;
   padding: 10px 40px;
   border: 2px solid ${props => props.theme.backgrounds.secondary};
@@ -57,9 +57,13 @@ const Category = styled(Link)<CategoryProps>`
   text-align: center;
   background: ${props => props.background};
   color: ${props => props.color};
+  margin-bottom: 40px;
+  box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.6);
 
   @media screen and (max-width: 800px) {
+    width: 100%;
     padding: 10px 30px;
+    margin-bottom: 44px;
   }
 `;
 

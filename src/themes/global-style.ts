@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     background:${props => props.theme.backgrounds.primary};
     color: ${props => props.theme.paragraph.primary};
-    overflow-y: auto;    
+    overflow-y: auto;
     scroll-behavior: smooth;
   }
 
@@ -203,6 +203,7 @@ const GlobalStyle = createGlobalStyle`
 
     & a {
       font-size: 18px;
+      color: #a7a9be;
     }
   }
 

@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
-// import { Link } from 'gatsby';
-import { DefaultTheme } from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'gatsby';
 import { ThemeProvider } from 'styled-components';
-// import CookieConsent from 'react-cookie-consent';
+import CookieConsent from 'react-cookie-consent';
 
-import '../../themes/index.css';
 import GlobalStyle from '../../themes/global-style';
+import '../../themes/index.css';
 
-import { useTheme } from '../../hooks/useTheme';
-
-import { Navbar, Footer, ThemeModal, BackToTop, SEO } from '../../components';
+import { Navbar, Footer, BackToTop, SEO } from '../../components';
 
 import logoImg from '../../images/logo.png';
 
@@ -21,26 +18,33 @@ interface Props {
   allowPadding?: boolean;
 }
 
-const isWebsiteThemed = (): boolean => Object.keys(themes).length > 1;
-
 const Layout: React.FC<Props> = ({
   children,
   noScriptMsg = 'JavaScript is disabled, theme changing and other functionalities may not work.',
   SEOComponent,
   allowPadding = true,
 }) => {
-  const [showThemeModal, setThemeModalState] = useState<boolean>(false);
-  const [currentTheme, setCurrentTheme] = useState<string>(
-    useTheme().themeName
-  );
-  const theme: DefaultTheme = useTheme(currentTheme).theme;
+  const [isDarkMode, setIsDarkTheme] = useState<boolean>(true);
+
+  useEffect(() => {
+    const loadedTheme = window.localStorage.getItem('darkmode');
+    loadedTheme === 'true' ? setIsDarkTheme(true) : setIsDarkTheme(false);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('darkmode', isDarkMode.toString());
+  }, [isDarkMode]);
+
+  const switchTheme = () => {
+    setIsDarkTheme(!isDarkMode);
+  };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={isDarkMode ? themes.main : themes.light}>
       {SEOComponent || <SEO />}
       <GlobalStyle />
       <BackToTop />
-      {/* <CookieConsent
+      <CookieConsent
         enableDeclineButton
         location="bottom"
         buttonText="Accept"
@@ -50,22 +54,14 @@ const Layout: React.FC<Props> = ({
       >
         This site uses cookies... {` `}
         <Link to="/privacy/">Read more about privacy.</Link>
-      </CookieConsent> */}
+      </CookieConsent>
       <header>
-        {showThemeModal && (
-          <ThemeModal
-            changeTheme={(newTheme: string): void => {
-              setCurrentTheme(newTheme);
-            }}
-            setVisibility={(): void => {
-              setThemeModalState(false);
-            }}
-          />
-        )}
         <Navbar
           logoSrc={logoImg}
-          openThemesModal={() => setThemeModalState(true)}
-          allowTheming={isWebsiteThemed()}
+          isDarkMode={isDarkMode}
+          changeTheme={(): void => {
+            switchTheme();
+          }}
         />
         <noscript>
           <p>{noScriptMsg}</p>

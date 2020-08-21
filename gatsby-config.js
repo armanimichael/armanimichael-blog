@@ -4,7 +4,7 @@ module.exports = {
     sitename: 'Armani Michael',
     siteUrl: 'https://blog.armanimichael.com',
     description:
-      'Software Developer based in Italy. Read more about programming and Web Development on my Blog - I mostly write about React.',
+      'Software Developer based in Italy. Read more about programming and Web Development on my Blog - I mostly write about React, but you can find other topics too.',
     author: '',
   },
   plugins: [
@@ -63,7 +63,6 @@ module.exports = {
       resolve: 'gatsby-plugin-styled-components',
       options: {
         displayName: false,
-        pure: true,
       },
     },
     'gatsby-transformer-json',

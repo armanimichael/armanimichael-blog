@@ -34,22 +34,24 @@ const PostPreview: React.FC<Props> = ({
   ) as Category;
 
   return (
-    <Container>
-      <PostStyled to={path}>
-        <Link to={path}>
-          <h2>{title}</h2>
-        </Link>
-        <span>{dateFormatted}</span>
-        <p>{excerpt}</p>
-      </PostStyled>
+    <>
+      <Container>
+        <PostStyled to={path}>
+          <Link to={path}>
+            <h2>{title}</h2>
+          </Link>
+          <span>{dateFormatted}</span>
+          <p>{excerpt}</p>
+        </PostStyled>
+      </Container>
       <Category
-        color={categoryData ? categoryData.color : 'black'}
-        background={categoryData ? categoryData.background : 'white'}
+        color={categoryData.color}
+        background={categoryData.background}
         to={'/category/' + category.toLowerCase().replace(/ /g, '-').trim()}
       >
         {category}
       </Category>
-    </Container>
+    </>
   );
 };
 

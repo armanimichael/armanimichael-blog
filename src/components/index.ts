@@ -3,7 +3,6 @@ import Button from './Button/Button';
 import Social from './Social/Social';
 import Footer from './Footer/Footer';
 import Modal from './Modal/Modal';
-import ThemeModal from './ThemeModal/ThemeModal';
 import BackToTop from './BackToTop/BackToTop';
 import SEO from './SEO/SEO';
 import Image from './Image/Image';
@@ -18,7 +17,6 @@ export {
   Social,
   Footer,
   Modal,
-  ThemeModal,
   BackToTop,
   SEO,
   Image,

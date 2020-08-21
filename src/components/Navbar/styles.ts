@@ -46,6 +46,7 @@ const Navbar = styled.nav`
   top: 0;
   left: 0;
   background: ${props => props.theme.backgrounds.primary};
+  overflow-y: hidden;
 
   & a {
     color: ${props => props.theme.paragraph.primary};
@@ -62,6 +63,10 @@ const NavbarExtended = styled(Navbar)<NavbarProps>`
   justify-content: flex-start;
   align-items: center;
   z-index: ${props => (props.isHidden ? 100 : 200)};
+
+  & span {
+    font-size: 22px;
+  }
 
   & svg {
     font-size: 28px;
@@ -195,7 +200,8 @@ const ContentWrapped = styled.div<ContentWrappedProps>`
     min-height: 28px;
   }
 
-  & a {
+  & a,
+  span {
     font-size: 24px;
     margin: 1em 2em 0 2em;
     word-break: break-all;
@@ -205,6 +211,10 @@ const ContentWrapped = styled.div<ContentWrappedProps>`
     &:last-child {
       margin: 1em 2em 1em 2em;
     }
+  }
+
+  & span {
+    text-align: center;
   }
 
   /* Overloads Opacity if under max-width */
