@@ -207,6 +207,22 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2.4em 0;
+  }
+
+  td, th {
+    padding: 1%;
+    text-align: center;
+  }
+
+  table, th, td {
+    color: ${props => props.theme.paragraph.primary};
+    border: 2px solid ${props => props.theme.paragraph.primary};
+  }  
+
   @media all and (max-width: 800px) {
     h1 {
       font-size: 40px;
