@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
-import { mainTheme } from './main-theme';
-import { secondaryTheme } from './secondary-theme';
+import { darkTheme } from './dark-theme';
+import { lightTheme } from './light-theme';
 
 interface Theme {
   [key: string]: DefaultTheme;
@@ -9,8 +9,8 @@ interface Theme {
 
 // Available themes
 const themes: Theme = {
-  main: mainTheme,
-  light: secondaryTheme,
+  dark: darkTheme,
+  light: lightTheme,
 };
 
 export default themes;

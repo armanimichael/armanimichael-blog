@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components';
 
-const mainTheme: DefaultTheme = {
+const darkTheme: DefaultTheme = {
   paragraph: {
     primary: '#a7a9be',
     secondary: '#2e2f3e',
@@ -39,4 +39,4 @@ const mainTheme: DefaultTheme = {
   },
 };
 
-export { mainTheme };
+export { darkTheme };

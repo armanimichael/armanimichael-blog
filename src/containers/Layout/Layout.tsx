@@ -27,7 +27,7 @@ const Layout: React.FC<Props> = ({
   const [isDarkMode, setIsDarkTheme] = useState<boolean>(true);
 
   useEffect(() => {
-    const loadedTheme = window.localStorage.getItem('darkmode');
+    const loadedTheme = window.localStorage.getItem('darkmode') || 'true';
     loadedTheme === 'true' ? setIsDarkTheme(true) : setIsDarkTheme(false);
   }, []);
 
@@ -40,7 +40,7 @@ const Layout: React.FC<Props> = ({
   };
 
   return (
-    <ThemeProvider theme={isDarkMode ? themes.main : themes.light}>
+    <ThemeProvider theme={isDarkMode ? themes.dark : themes.light}>
       {SEOComponent || <SEO />}
       <GlobalStyle />
       <BackToTop />
