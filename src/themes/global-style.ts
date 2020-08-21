@@ -221,7 +221,28 @@ const GlobalStyle = createGlobalStyle`
   table, th, td {
     color: ${props => props.theme.paragraph.primary};
     border: 2px solid ${props => props.theme.paragraph.primary};
-  }  
+  }
+
+  a.edit-on-github {
+    margin: 40px 40px 0px 40px;
+    display: inline-block;
+    color: ${props => props.theme.paragraph.primary};
+    text-decoration: none;
+    font-size: 20px;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: ${props => props.theme.paragraph.primary};
+    }
+
+    & svg {
+      vertical-align: text-top;
+      margin-right: 6px;
+    }
+  }
 
   @media all and (max-width: 800px) {
     h1 {
@@ -264,6 +285,10 @@ const GlobalStyle = createGlobalStyle`
     .blog-wrapper {
       width: 90%;
     }
+
+    a.edit-on-github {
+    margin: 40px 10px 0px 10px;
+  }
   }
 `;
 

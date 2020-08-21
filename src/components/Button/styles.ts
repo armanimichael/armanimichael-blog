@@ -15,7 +15,7 @@ const ButtonStyled = styled.button<ButtonProps>`
   border-radius: 100px;
   outline: none;
   border: none;
-  margin: 20px;
+  margin: 40px;
   cursor: pointer;
   z-index: 100;
   box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.6);
@@ -25,7 +25,7 @@ const ButtonStyled = styled.button<ButtonProps>`
     margin: 0;
     color: ${props =>
       props.styles ? props.styles.color : props.theme.button.primaryColor};
-    font-size: 16pt;
+    font-size: 20px;
   }
 
   &::before {
