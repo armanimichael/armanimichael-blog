@@ -50,7 +50,7 @@ const Layout: React.FC<Props> = ({
         buttonText="Accept"
         declineButtonText="Decline"
         cookieName="gatsby-gdpr-google-analytics"
-        cookieSecurity
+        sameSite="strict"
       >
         This site uses cookies... {` `}
         <Link to="/privacy/">Read more about privacy.</Link>

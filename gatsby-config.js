@@ -12,7 +12,7 @@ module.exports = {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
         googleAnalytics: {
-          trackingId: 'YOUR_GOOGLE_ANALYTICS_TRACKING_ID',
+          trackingId: 'UA-176071860-1',
           anonymize: true,
         },
         environments: ['production', 'development'],
@@ -171,6 +171,7 @@ module.exports = {
               target: '_blank',
             },
           },
+          'gatsby-plugin-offline',
         ],
       },
     },
