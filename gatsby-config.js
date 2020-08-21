@@ -15,7 +15,7 @@ module.exports = {
           trackingId: 'UA-176071860-1',
           anonymize: true,
         },
-        environments: ['production', 'development'],
+        environments: ['production'],
       },
     },
     'gatsby-plugin-catch-links',
