@@ -8,6 +8,7 @@ module.exports = {
     author: '',
   },
   plugins: [
+    'gatsby-plugin-offline',
     {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
@@ -172,7 +173,6 @@ module.exports = {
               target: '_blank',
             },
           },
-          'gatsby-plugin-offline',
         ],
       },
     },
