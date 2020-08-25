@@ -8,7 +8,7 @@ interface Props {
 }
 
 const MenuButton: React.FC<Props> = ({ isClicked, onClick }) => (
-  <MenuButtonStyled onClick={onClick}>
+  <MenuButtonStyled onClick={onClick} title="Open Navigation">
     <Top isClicked={isClicked} />
     <Center isClicked={isClicked} />
     <Bottom isClicked={isClicked} />

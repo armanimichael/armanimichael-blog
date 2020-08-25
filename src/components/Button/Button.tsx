@@ -11,6 +11,7 @@ interface Props {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   anchorTo?: string;
   styles?: Styles;
+  title?: string;
 }
 
 const Button: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const Button: React.FC<Props> = ({
   onClick,
   anchorTo = '/',
   styles,
+  title,
 }) => {
   // Check external links
   const isInternal: boolean = /^\/(?!\/)/.test(anchorTo);
@@ -32,7 +34,7 @@ const Button: React.FC<Props> = ({
 
   if (isInternal) {
     return (
-      <Link to={anchorTo}>
+      <Link to={anchorTo} title={title}>
         <ButtonStyled styles={styles}>
           <p>{children}</p>
         </ButtonStyled>
@@ -41,7 +43,12 @@ const Button: React.FC<Props> = ({
   }
 
   return (
-    <a href={anchorTo} target="_blank" rel="nofollow noopener noreferrer">
+    <a
+      href={anchorTo}
+      target="_blank"
+      rel="nofollow noopener noreferrer"
+      title={title}
+    >
       <ButtonStyled styles={styles}>
         <p>{children}</p>
       </ButtonStyled>

@@ -33,6 +33,7 @@ const NavbarWrapped: React.FC<Props> = props => {
         to="/"
         size={40}
         marginLeft={35}
+        title="Homepage"
       />
       <MenuButton isClicked={isOpen} onClick={() => setOpen(!isOpen)} />
       <ContentWrapped isClicked={isOpen} isHidden={props.isHidden}>

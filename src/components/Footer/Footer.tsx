@@ -24,7 +24,13 @@ const Footer: React.FC<Props> = ({ logoSrc, customTitle, logoBackground }) => {
       <FooterStyled>
         <div>
           <h3>{customTitle || title}</h3>
-          {logoSrc && <Logo image={logoSrc} backgroundColor={logoBackground} />}
+          {logoSrc && (
+            <Logo
+              image={logoSrc}
+              backgroundColor={logoBackground}
+              title="Homepage"
+            />
+          )}
         </div>
         <div>
           <h3>

@@ -66,6 +66,11 @@ const NavbarExtended = styled(Navbar)<NavbarProps>`
 
   & span {
     font-size: 22px;
+    cursor: pointer;
+
+    &::selection {
+      background: none;
+    }
   }
 
   & svg {
@@ -176,8 +181,6 @@ const Bottom = styled(Line)<ButtonProps>`
 
 const ContentWrapped = styled.div<ContentWrappedProps>`
   position: fixed;
-  /* 108px = 36px button * 3 */
-  /* max-width: calc(100vw - 108px); */
   height: 100vh;
   background: ${props => props.theme.backgrounds.primary};
   border-right: 2px solid rgba(0, 0, 0, 0.6);
@@ -216,6 +219,10 @@ const ContentWrapped = styled.div<ContentWrappedProps>`
   & span {
     text-align: center;
     cursor: pointer;
+
+    &::selection {
+      background: none;
+    }
   }
 
   /* Overloads Opacity if under max-width */

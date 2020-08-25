@@ -19,6 +19,7 @@ export const DefaultSocials: React.FC<DefaultSocialsProps> = ({ isSmall }) => {
         href={link}
         image={loadSocialImage(image)}
         isSmall={isSmall}
+        name={image}
       />
     ));
 

@@ -163,6 +163,7 @@ module.exports = {
             options: {
               maxWidth: 950,
               quality: 100,
+              linkImagesToOriginal: true,
             },
           },
           {
