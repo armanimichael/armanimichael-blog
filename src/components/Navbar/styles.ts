@@ -215,6 +215,7 @@ const ContentWrapped = styled.div<ContentWrappedProps>`
 
   & span {
     text-align: center;
+    cursor: pointer;
   }
 
   /* Overloads Opacity if under max-width */

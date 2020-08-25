@@ -1,35 +1,43 @@
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 
-const arrowSize = 8;
-const PageButtonStyled = styled.div`
-  width: 100%;
+interface Props {
+  previous: boolean;
+  latest: boolean;
+}
+
+const Container = styled.div<Props>`
+  width: calc(50% + 40px);
   display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+  flex-direction: row;
+  justify-content: ${props =>
+    props.previous && props.latest ? 'space-between' : 'center'};
 
-const PageButton = styled(Link)`
-  border: solid ${props => props.theme.paragraph.primary};
-  border-width: 0 ${arrowSize}px ${arrowSize}px 0;
-  display: inline-block;
-  padding: ${arrowSize}px;
-  transform: rotate(135deg);
-  margin: ${arrowSize * 4}px 0;
-
-  transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 0.8;
+  @media screen and (max-width: 800px) {
+    width: 100%;
   }
 `;
 
-const NextPageButton = styled(PageButton)`
-  transform: rotate(135deg);
+const PageButtonStyled = styled(Link)<Props>`
+  display: block;
+  width: ${props => (props.previous && props.latest ? '44%' : '80%')};
+  font-size: 18px;
+  text-align: center;
+  margin: 40px 0;
+  background: ${props => props.theme.button.primary};
+  color: ${props => props.theme.button.primaryColor};
+  padding: 10px 0;
+  text-decoration: none;
+  border-radius: 10px;
+
+  & svg {
+    font-size: 18px;
+    vertical-align: text-bottom;
+  }
+
+  @media screen and (max-width: 800px) {
+    margin-bottom: 44px 0;
+  }
 `;
 
-const PreviousPageButton = styled(PageButton)`
-  transform: rotate(-45deg);
-`;
-
-export { PageButtonStyled, NextPageButton, PreviousPageButton };
+export { PageButtonStyled, Container };

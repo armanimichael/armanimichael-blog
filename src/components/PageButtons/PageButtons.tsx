@@ -1,6 +1,7 @@
 import React from 'react';
+import { IoMdArrowDropright, IoMdArrowDropleft } from 'react-icons/io';
 
-import { PageButtonStyled, NextPageButton, PreviousPageButton } from './styles';
+import { Container, PageButtonStyled } from './styles';
 
 interface Props {
   previous: boolean;
@@ -38,15 +39,29 @@ const PageButtons: React.FC<Props> = ({
   return (
     <>
       {previous && latest && <hr />}
-      <PageButtonStyled>
-        {latest ? (
-          <NextPageButton to={latestRedirect()} title="Next Page" />
-        ) : null}
-        {latest && previous ? <div style={{ width: '20%' }}></div> : null}
-        {previous ? (
-          <PreviousPageButton to={previousRedirect()} title="Previous Page" />
-        ) : null}
-      </PageButtonStyled>
+      <Container latest={latest} previous={previous}>
+        {latest && (
+          <PageButtonStyled
+            latest={latest}
+            previous={previous}
+            to={latestRedirect()}
+            title="Latest Posts"
+          >
+            <IoMdArrowDropleft />
+            Latest Posts
+          </PageButtonStyled>
+        )}
+        {previous && (
+          <PageButtonStyled
+            latest={latest}
+            previous={previous}
+            to={previousRedirect()}
+            title="Older Posts"
+          >
+            Older Posts <IoMdArrowDropright />
+          </PageButtonStyled>
+        )}
+      </Container>
     </>
   );
 };
