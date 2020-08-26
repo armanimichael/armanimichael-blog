@@ -16,7 +16,7 @@ const Social: React.FC<Props> = ({ href, image, name, isSmall = false }) => (
     target="_blank"
     image={image}
     isSmall={isSmall}
-    title={name.toUpperCase()}
+    title={name.substring(0, 1).toUpperCase() + name.substring(1)}
   />
 );
 
