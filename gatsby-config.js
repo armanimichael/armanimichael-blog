@@ -1,10 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: 'Armani Michael',
+    title: "Mike's Blog",
     sitename: 'Armani Michael',
     siteUrl: 'https://blog.armanimichael.com',
     description:
-      'Software Developer based in Italy. Read more about programming and Web Development on my Blog - I mostly write about React, but you can find other topics too.',
+      'Software Developer based in Italy. Read more about programming and Web Development on my Blog - I mostly write about Web Development and ReactJS, but you can find other topics too.',
     author: '',
   },
   plugins: [
@@ -54,9 +54,9 @@ module.exports = {
         name: 'armani-michael-blog',
         short_name: 'mike-blog',
         start_url: '/',
-        background_color: '#232946',
-        theme_color: '#232946',
-        display: 'minimal-ui',
+        background_color: '#0f0e17',
+        theme_color: '#a7a9be',
+        display: 'fullscreen',
         icon: 'src/images/logo.png', // This path is relative to the root of the site.
       },
     },
