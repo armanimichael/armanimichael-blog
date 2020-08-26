@@ -46,7 +46,7 @@ const Post: React.FC<Props> = ({ data: { mdx } }) => (
             <IoMdCreate />
             Suggest an edit on Github
           </a>
-          <Button title="Back to Top">Homepage</Button>
+          <Button title="Homepage">Homepage</Button>
         </div>
       </MDXProvider>
     </div>
