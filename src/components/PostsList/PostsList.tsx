@@ -25,6 +25,7 @@ const PostsList: React.FC<Props> = ({ edges }) => {
   edges.forEach((post: PostData) => {
     const { id } = post.node;
     const { title, slug, date, category, excerpt } = post.node.frontmatter;
+    console.log(slug);
 
     posts.push(
       <PostPreview
