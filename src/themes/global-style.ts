@@ -190,6 +190,10 @@ const GlobalStyle = createGlobalStyle`
 
   .blog-wrapper {
     width: 50%;
+
+    & a {
+      color: ${props => props.theme.button.primary};
+    }
   }
 
 
