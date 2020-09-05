@@ -34,8 +34,11 @@ category: ${settings.category}
 ---
 `.trim();
 
-const postPath = `./src/posts/${settings.filename}/`;
-const postFile = `${settings.filename}.mdx`;
+const filename = settings.filename
+  .replace(/[\\~#%&*{}/:<>?|\"-/ /]/g, '')
+  .toLowerCase(); // Replace invalid chars
+const postPath = `./src/posts/${filename}/`;
+const postFile = `${filename}.mdx`;
 
 fs.mkdir(postPath, error => {
   if (error) throw error;
