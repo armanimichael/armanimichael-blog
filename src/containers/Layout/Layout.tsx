@@ -70,7 +70,7 @@ const Layout: React.FC<Props> = ({
       <main className={allowPadding ? 'general-content' : 'home-content'}>
         {children}
       </main>
-      <Footer logoSrc={logoImg}></Footer>
+      <Footer logoSrc={logoImg} />
     </ThemeProvider>
   );
 };
