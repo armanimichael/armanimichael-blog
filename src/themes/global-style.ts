@@ -178,6 +178,7 @@ const GlobalStyle = createGlobalStyle`
 
   .gatsby-resp-image-image {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 32px 32px 0px, rgba(0, 0, 0, 0.15) 0px 16px 16px 0px, rgba(0, 0, 0, 0.15) 0px 8px 8px 0px, rgba(0, 0, 0, 0.15) 0px 4px 4px 0px !important;
+    background: ${props => props.theme.backgrounds.secondary};
   }
 
   :not(pre) > code[class*="language-"] {
