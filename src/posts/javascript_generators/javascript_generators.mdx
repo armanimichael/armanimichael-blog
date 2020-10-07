@@ -13,7 +13,7 @@ category: JavaScript
 
 Generators are nothing more than special **functions**. They let you control the **iterator**, you can stop and resume them at any time.
 
-The result will be what you except, differently from iterators like the for...of loop they **keep track of the last operation they did**.
+The result will be what you except, differently from iterators like the `for...of` loop they **keep track of the last operation they did**.
 
 Generators were introduced in **ES6**.
 
@@ -37,7 +37,7 @@ As soon as we use `yield`, the generator will stop.
 
 ```javascript
 function* generator() {
-    yield 1;
+  yield 1;
 }
 ```
 
@@ -47,11 +47,11 @@ Using the return statement inside the generator will make sure that, as soon as 
 
 ```javascript
 function* generator() {
-    yield 1;
-    yield 2;
-    yield 3;
-    
-    return 0;
+  yield 1;
+  yield 2;
+  yield 3;
+
+  return 0;
 }
 ```
 
