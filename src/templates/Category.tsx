@@ -29,7 +29,7 @@ const Category: React.FC<Props> = ({
   // TODO ADD Image
   return (
     <Layout SEOComponent={<SEO title={category} description={description} />}>
-      <h1>Category - {category}</h1>
+      <h1 style={{ textAlign: 'center' }}>Category - {category}</h1>
       <hr className="section-heading-divider" />
       <PostsList edges={edges} />
     </Layout>
