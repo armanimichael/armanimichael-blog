@@ -67,6 +67,7 @@ const NavbarExtended = styled(Navbar)<NavbarProps>`
   & span {
     font-size: 22px;
     cursor: pointer;
+    margin: 0 40px;
 
     &::selection {
       background: none;
