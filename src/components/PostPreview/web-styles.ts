@@ -29,6 +29,8 @@ const PostStyledWeb = styled(Link)`
   box-sizing: border-box;
   border-radius: 0 40px 40px 0;
   text-decoration: none;
+  transition: opacity 0.2s ease;
+  opacity: 1;
 
   & h2,
   p {
@@ -38,6 +40,10 @@ const PostStyledWeb = styled(Link)`
 
   & h2 {
     margin-top: 0;
+  }
+
+  &:hover {
+    opacity: 0.6;
   }
 `;
 
@@ -53,6 +59,12 @@ const CategoryWeb = styled(Link)<CategoryWebProps>`
   font-size: 32px;
   padding: 40px;
   text-align: center;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.6;
+  }
 `;
 
 const SeparatorWeb = styled.div`

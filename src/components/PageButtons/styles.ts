@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Container = styled.div<Props>`
-  width: calc(50% + 40px);
+  width: calc(80% - 80px);
   display: flex;
   flex-direction: row;
   justify-content: ${props =>
@@ -20,7 +20,7 @@ const Container = styled.div<Props>`
 
 const PageButtonStyled = styled(Link)<Props>`
   display: block;
-  width: ${props => (props.previous && props.latest ? '44%' : '80%')};
+  width: ${props => (props.previous && props.latest ? '44%' : '100%')};
   font-size: 18px;
   text-align: center;
   margin: 40px 0;
@@ -35,8 +35,16 @@ const PageButtonStyled = styled(Link)<Props>`
     vertical-align: text-bottom;
   }
 
-  @media screen and (max-width: 800px) {
+  @media all and (max-width: 800px) {
     margin-bottom: 44px 0;
+  }
+
+  @media all and (pointer: fine) {
+    opacity: 1;
+    transition: opacity 0.2s ease;
+    &:hover {
+      opacity: 0.6;
+    }
   }
 `;
 
