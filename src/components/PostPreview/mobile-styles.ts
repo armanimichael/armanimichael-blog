@@ -12,7 +12,8 @@ const PostStyledMobile = styled.div`
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.paragraph.primary + '7f'};
-  padding: 20px;
+  padding: 20px 10px;
+  box-sizing: border-box;
 
   & a {
     text-decoration: none;
