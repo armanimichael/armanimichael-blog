@@ -3,7 +3,20 @@ import { Link } from 'gatsby';
 
 import { useCategories } from '../../queries/useCategories';
 
-import { PostStyled, Container, Category } from './styles';
+import {
+  PostStyledWeb,
+  ContainerWeb,
+  CategoryWeb,
+  SeparatorWeb,
+  BottomBarWeb,
+} from './web-styles';
+
+import {
+  PostStyledMobile,
+  CategoryMobile,
+  DateMobile,
+  SeparatorMobile,
+} from './mobile-styles';
 
 interface Props {
   title: string;
@@ -13,7 +26,7 @@ interface Props {
   path: string;
 }
 
-interface Category {
+interface CategoryWeb {
   background: string;
   color: string;
   description: string;
@@ -28,29 +41,56 @@ const PostPreview: React.FC<Props> = ({
   date,
   path,
 }) => {
-  const dateFormatted = new Date(date).toLocaleDateString().replace(/\//g, '-');
-  const categoryData: Category = useCategories().find(
+  const dateFormatted = new Date(date)
+    .toLocaleDateString()
+    .replace(/\//g, ' / ');
+  const categoryLink = `/category/${category
+    .toLowerCase()
+    .replace(/ /g, '-')
+    .trim()}`;
+
+  const categoryData: CategoryWeb = useCategories().find(
     ({ name }) => name.toLowerCase() === category.toLowerCase()
-  ) as Category;
+  ) as CategoryWeb;
 
   return (
     <>
-      <Container>
-        <PostStyled to={path}>
-          <Link to={path}>
-            <h2>{title}</h2>
-          </Link>
-          <span>{dateFormatted}</span>
+      {/* //* WEB COMPONENTS */}
+      <ContainerWeb>
+        <CategoryWeb
+          color={categoryData.color}
+          background={categoryData.background}
+          to={categoryLink}
+        >
+          {category}
+        </CategoryWeb>
+        <PostStyledWeb to={path}>
+          <h2>{title}</h2>
           <p>{excerpt}</p>
-        </PostStyled>
-      </Container>
-      <Category
-        color={categoryData.color}
-        background={categoryData.background}
-        to={'/category/' + category.toLowerCase().replace(/ /g, '-').trim()}
-      >
-        {category}
-      </Category>
+          <SeparatorWeb />
+          <BottomBarWeb>
+            <span>{dateFormatted}</span>
+            <span>Read more...</span>
+          </BottomBarWeb>
+        </PostStyledWeb>
+      </ContainerWeb>
+
+      {/* //* MOBILE COMPONENTS */}
+      <PostStyledMobile>
+        <Link to={path}>
+          <h2>{title}</h2>
+          <DateMobile>{dateFormatted}</DateMobile>
+          <SeparatorMobile />
+          <p>{excerpt}</p>
+        </Link>
+        <CategoryMobile
+          color={categoryData.color}
+          background={categoryData.background}
+          to={categoryLink}
+        >
+          <span>{category}</span>
+        </CategoryMobile>
+      </PostStyledMobile>
     </>
   );
 };

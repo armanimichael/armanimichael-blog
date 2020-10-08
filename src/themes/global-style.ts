@@ -247,7 +247,7 @@ const GlobalStyle = createGlobalStyle`
       margin-right: 6px;
     }
   }
-
+  
   @media all and (max-width: 800px) {
     h1 {
       font-size: 40px;
@@ -291,8 +291,13 @@ const GlobalStyle = createGlobalStyle`
     }
 
     a.edit-on-github {
-    margin: 40px 10px 0px 10px;
-  }
+      margin: 40px 10px 0px 10px;
+    }
+
+    
+    .blog-feed-separator {
+      display: none;
+    }
   }
 `;
 

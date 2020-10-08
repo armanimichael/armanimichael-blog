@@ -38,7 +38,7 @@ const PageButtons: React.FC<Props> = ({
 
   return (
     <>
-      {previous && latest && <hr />}
+      {previous && latest && <hr className="blog-feed-separator" />}
       <Container latest={latest} previous={previous}>
         {latest && (
           <PageButtonStyled
