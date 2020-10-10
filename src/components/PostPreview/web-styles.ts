@@ -16,7 +16,7 @@ const ContainerWeb = styled.div`
     margin: 80px 40px 40px 40px;
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 1000px) {
     display: none;
   }
 `;
@@ -71,16 +71,18 @@ const SeparatorWeb = styled.div`
   width: 60px;
   height: 14px;
   background: ${props => props.theme.button.primary};
-  margin: 20px 0;
+  margin: 20px 0 0 0;
 `;
 
 const BottomBarWeb = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   & span {
     color: ${props => props.theme.headline.secondary + 'b3'};
+    margin: 20px 20px 0 0;
   }
 `;
 

@@ -28,7 +28,7 @@ const PostStyledMobile = styled.div`
     margin: 0 0 20px 0;
   }
 
-  @media all and (min-width: 801px) {
+  @media all and (min-width: 1001px) {
     display: none;
   }
 `;
