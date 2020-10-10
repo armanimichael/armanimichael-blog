@@ -18,18 +18,23 @@ interface Props {
   allowPadding?: boolean;
 }
 
+// Fetch Theme from Local Storage
+const getTheme = () => {
+  if (typeof window !== `undefined`) {
+    const loadedTheme = window.localStorage.getItem('darkmode') || 'true';
+    return loadedTheme === 'true' ? true : false;
+  }
+
+  return true;
+};
+
 const Layout: React.FC<Props> = ({
   children,
   noScriptMsg = 'JavaScript is disabled, theme changing and other functionalities may not work.',
   SEOComponent,
   allowPadding = true,
 }) => {
-  const [isDarkMode, setIsDarkTheme] = useState<boolean>(true);
-
-  useEffect(() => {
-    const loadedTheme = window.localStorage.getItem('darkmode') || 'true';
-    loadedTheme === 'true' ? setIsDarkTheme(true) : setIsDarkTheme(false);
-  }, []);
+  const [isDarkMode, setIsDarkTheme] = useState<boolean>(getTheme());
 
   useEffect(() => {
     window.localStorage.setItem('darkmode', isDarkMode.toString());
