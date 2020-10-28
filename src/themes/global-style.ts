@@ -293,11 +293,6 @@ const GlobalStyle = createGlobalStyle`
     a.edit-on-github {
       margin: 40px 10px 0px 10px;
     }
-
-    
-    .blog-feed-separator {
-      display: none;
-    }
   }
 `;
 
