@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Container = styled.div<Props>`
-  width: calc(80% - 80px);
+  width: 60%;
   display: flex;
   flex-direction: row;
   justify-content: ${props =>

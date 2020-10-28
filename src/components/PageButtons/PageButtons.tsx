@@ -37,32 +37,29 @@ const PageButtons: React.FC<Props> = ({
   };
 
   return (
-    <>
-      {previous && latest && <hr className="blog-feed-separator" />}
-      <Container latest={latest} previous={previous}>
-        {latest && (
-          <PageButtonStyled
-            latest={latest}
-            previous={previous}
-            to={latestRedirect()}
-            title="Latest Posts"
-          >
-            <IoMdArrowDropleft />
-            Latest Posts
-          </PageButtonStyled>
-        )}
-        {previous && (
-          <PageButtonStyled
-            latest={latest}
-            previous={previous}
-            to={previousRedirect()}
-            title="Older Posts"
-          >
-            Older Posts <IoMdArrowDropright />
-          </PageButtonStyled>
-        )}
-      </Container>
-    </>
+    <Container latest={latest} previous={previous}>
+      {latest && (
+        <PageButtonStyled
+          latest={latest}
+          previous={previous}
+          to={latestRedirect()}
+          title="Latest Posts"
+        >
+          <IoMdArrowDropleft />
+          Latest Posts
+        </PageButtonStyled>
+      )}
+      {previous && (
+        <PageButtonStyled
+          latest={latest}
+          previous={previous}
+          to={previousRedirect()}
+          title="Older Posts"
+        >
+          Older Posts <IoMdArrowDropright />
+        </PageButtonStyled>
+      )}
+    </Container>
   );
 };
 
