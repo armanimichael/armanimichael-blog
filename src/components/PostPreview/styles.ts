@@ -6,18 +6,23 @@ interface CategoryProps {
   background: string;
 }
 
-const PostStyledMobile = styled.div`
-  width: 100%;
+const PostStyled = styled.div`
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.paragraph.primary + '7f'};
-  padding: 20px 10px;
+  padding: 2.4rem 10px;
   box-sizing: border-box;
 
   & a {
+    transition: opacity 0.2s ease;
     text-decoration: none;
     width: 90%;
+
+    &:hover {
+      opacity: 0.5;
+    }
   }
 
   & h2 {
@@ -28,16 +33,18 @@ const PostStyledMobile = styled.div`
     margin: 0 0 20px 0;
   }
 
-  @media all and (min-width: 1001px) {
-    display: none;
+  @media all and (max-width: 800px) {
+    width: 100%;
+    padding: 1.2rem 10px;
   }
 `;
 
-const CategoryMobile = styled(Link)<CategoryProps>`
+const Category = styled(Link)<CategoryProps>`
   margin: 10px 0 0 0;
   width: 90%;
   display: flex;
   align-items: center;
+  transition: opacity 0.2s ease;
 
   & span {
     color: ${props => props.color};
@@ -46,19 +53,25 @@ const CategoryMobile = styled(Link)<CategoryProps>`
     padding: 0 10px;
     background: ${props => props.background};
   }
+
+  @media all and (pointer: fine) {
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `;
 
-const DateMobile = styled.p`
+const DateContainer = styled.p`
   font-size: 18px;
   margin: 0;
   opacity: 80%;
 `;
 
-const SeparatorMobile = styled.div`
+const Separator = styled.div`
   width: 40px;
   height: 8px;
   background: ${props => props.theme.button.primary};
   margin: 10px 0;
 `;
 
-export { PostStyledMobile, CategoryMobile, DateMobile, SeparatorMobile };
+export { PostStyled, Category, DateContainer, Separator };

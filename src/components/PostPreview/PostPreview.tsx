@@ -3,20 +3,7 @@ import { Link } from 'gatsby';
 
 import { useCategories } from '../../queries/useCategories';
 
-import {
-  PostStyledWeb,
-  ContainerWeb,
-  CategoryWeb,
-  SeparatorWeb,
-  BottomBarWeb,
-} from './web-styles';
-
-import {
-  PostStyledMobile,
-  CategoryMobile,
-  DateMobile,
-  SeparatorMobile,
-} from './mobile-styles';
+import { PostStyled, Category, DateContainer, Separator } from './styles';
 
 interface Props {
   title: string;
@@ -54,44 +41,21 @@ const PostPreview: React.FC<Props> = ({
   ) as CategoryWeb;
 
   return (
-    <>
-      {/* //* WEB COMPONENTS */}
-      <ContainerWeb>
-        <CategoryWeb
-          color={categoryData.color}
-          background={categoryData.background}
-          to={categoryLink}
-        >
-          {category}
-        </CategoryWeb>
-        <PostStyledWeb to={path}>
-          <h2>{title}</h2>
-          <p>{excerpt}</p>
-          <SeparatorWeb />
-          <BottomBarWeb>
-            <span>{dateFormatted}</span>
-            <span>Read more...</span>
-          </BottomBarWeb>
-        </PostStyledWeb>
-      </ContainerWeb>
-
-      {/* //* MOBILE COMPONENTS */}
-      <PostStyledMobile>
-        <Link to={path}>
-          <h2>{title}</h2>
-          <DateMobile>{dateFormatted}</DateMobile>
-          <SeparatorMobile />
-          <p>{excerpt}</p>
-        </Link>
-        <CategoryMobile
-          color={categoryData.color}
-          background={categoryData.background}
-          to={categoryLink}
-        >
-          <span>{category}</span>
-        </CategoryMobile>
-      </PostStyledMobile>
-    </>
+    <PostStyled>
+      <Link to={path}>
+        <h2>{title}</h2>
+        <DateContainer>{dateFormatted}</DateContainer>
+        <Separator />
+        <p>{excerpt}</p>
+      </Link>
+      <Category
+        color={categoryData.color}
+        background={categoryData.background}
+        to={categoryLink}
+      >
+        <span>{category}</span>
+      </Category>
+    </PostStyled>
   );
 };
 
