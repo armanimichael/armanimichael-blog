@@ -18,6 +18,11 @@ const lightTheme: DefaultTheme = {
     secondaryColor: '',
   },
 
+  navbar: {
+    background: '',
+    color: '',
+  },
+
   backgrounds: {
     primary: '#fffffe',
     secondary: '#e3f6f5',

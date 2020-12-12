@@ -45,7 +45,7 @@ const Navbar = styled.nav`
   height: 100%;
   top: 0;
   left: 0;
-  background: ${props => props.theme.backgrounds.primary};
+  background: ${props => props.theme.navbar.background};
   overflow-y: hidden;
 
   & a {

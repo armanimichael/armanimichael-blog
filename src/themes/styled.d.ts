@@ -12,6 +12,11 @@ declare module 'styled-components' {
       secondary: string;
     };
 
+    navbar: {
+      background: string;
+      color: string;
+    };
+
     button: {
       primary: string;
       primaryColor: string;

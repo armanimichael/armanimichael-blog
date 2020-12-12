@@ -2,7 +2,7 @@ import { DefaultTheme } from 'styled-components';
 
 const darkTheme: DefaultTheme = {
   paragraph: {
-    primary: '#a7a9be',
+    primary: '#8F93A2',
     secondary: '#2e2f3e',
   },
 
@@ -12,14 +12,19 @@ const darkTheme: DefaultTheme = {
   },
 
   button: {
-    primary: '#ff8906',
+    primary: '#0a4494',
     primaryColor: '#fffffe',
     secondary: '',
     secondaryColor: '',
   },
 
+  navbar: {
+    background: '#090b10',
+    color: '',
+  },
+
   backgrounds: {
-    primary: '#0f0e17',
+    primary: '#0F111A',
     secondary: '#fffffe',
   },
 
