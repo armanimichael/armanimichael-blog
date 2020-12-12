@@ -2,7 +2,6 @@ import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { Link, graphql } from 'gatsby';
-import { IoMdCreate } from 'react-icons/io';
 import { SEO, Button } from '../components';
 import { Layout } from '../containers';
 
@@ -37,15 +36,6 @@ const Post: React.FC<Props> = ({ data: { mdx } }) => (
         <MDXRenderer>{mdx.body}</MDXRenderer>
         <hr />
         <div className="centered">
-          <a
-            className="edit-on-github"
-            href={`https://github.com/armanimichael/armanimichael-blog/tree/master/src/posts/${mdx.slug}.mdx`}
-            target="_blank"
-            rel="nofollow noopener noreferrer"
-          >
-            <IoMdCreate />
-            Suggest an edit on Github
-          </a>
           <Button title="Homepage">Homepage</Button>
         </div>
       </MDXProvider>

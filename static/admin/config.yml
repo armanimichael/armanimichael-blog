@@ -1,0 +1,21 @@
+backend:
+  name: github
+  repo: armanimichael/armanimichael-blog
+
+media_folder: static/assets
+public_folder: /assets
+
+collections:
+  - name: blog
+    label: Blog
+    folder: blog
+    create: true
+    fields:
+      - { name: title, label: Title }
+      - { name: crawlerTitle, label: Crawler Title }
+      - { name: keywords, label: Keywords }
+      - { name: excerpt, label: Excerpt }
+      - { name: slug, label: Slug }
+      - { name: date, label: date, widget: datetime }
+      - { name: category, label: Category }
+      - { name: body, label: Body, widget: markdown }
