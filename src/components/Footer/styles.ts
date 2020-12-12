@@ -8,8 +8,8 @@ interface LogoProps {
 
 // * Styles
 const FooterStyled = styled.footer`
-  padding: 40px;
-  background: rgb(20, 20, 20);
+  padding: 40px 40px 40px 40px;
+  background: ${props => props.theme.footer.background};
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -25,7 +25,7 @@ const FooterStyled = styled.footer`
     & p,
     a,
     h3 {
-      color: rgba(255, 255, 255, 0.9);
+      color: ${props => props.theme.footer.color};
     }
 
     & a {
@@ -59,6 +59,7 @@ const Logo = styled.div<LogoProps>`
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  cursor: pointer;
 
   @media all and (max-width: 800px) {
     width: 50px;
@@ -70,22 +71,25 @@ const Logo = styled.div<LogoProps>`
 const SocialsContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
-  border-top: 1px solid rgb(50, 50, 50);
-  background: rgb(20, 20, 20);
+  border-top: 1px solid ${props => props.theme.footer.borderColor};
+  border-bottom: 1px solid ${props => props.theme.footer.borderColor};
+  background: ${props => props.theme.footer.background};
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   padding: 0;
+  margin-bottom: 80px;
 
   @media all and (max-width: 800px) {
-    padding: 30px 0;
+    padding: 0 30px;
+    margin-bottom: 50px;
   }
 `;
 
 const LinksContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
   max-width: 200px;
   justify-content: flex-start;
   align-items: flex-start;

@@ -28,6 +28,16 @@ const GlobalStyle = createGlobalStyle`
     overflow-y: auto;
   }
 
+  header {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
+  }
+
   a, p, li, ul, ol, td, th {
     font-size: 22px;
     line-height: 1.6em;   

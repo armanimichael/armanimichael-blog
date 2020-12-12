@@ -6,7 +6,7 @@ import CookieConsent from 'react-cookie-consent';
 import GlobalStyle from '../../themes/global-style';
 import '../../themes/index.css';
 
-import { Navbar, Footer, BackToTop, SEO } from '../../components';
+import { Navbar, Footer, SEO } from '../../components';
 
 import logoImg from '../../images/logo.png';
 
@@ -48,7 +48,7 @@ const Layout: React.FC<Props> = ({
     <ThemeProvider theme={isDarkMode ? themes.dark : themes.light}>
       {SEOComponent || <SEO />}
       <GlobalStyle />
-      <BackToTop />
+      {/* <BackToTop /> */}
       <CookieConsent
         enableDeclineButton
         location="bottom"
@@ -62,7 +62,6 @@ const Layout: React.FC<Props> = ({
       </CookieConsent>
       <header>
         <Navbar
-          logoSrc={logoImg}
           isDarkMode={isDarkMode}
           changeTheme={(): void => {
             switchTheme();

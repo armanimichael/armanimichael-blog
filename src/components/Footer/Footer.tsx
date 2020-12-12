@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 
 import { IoIosPaper, IoMdInformationCircleOutline } from 'react-icons/io';
 
@@ -29,6 +29,7 @@ const Footer: React.FC<Props> = ({ logoSrc, customTitle, logoBackground }) => {
               image={logoSrc}
               backgroundColor={logoBackground}
               title="Homepage"
+              onClick={() => navigate('/')}
             />
           )}
         </div>
@@ -42,7 +43,6 @@ const Footer: React.FC<Props> = ({ logoSrc, customTitle, logoBackground }) => {
           <h3>
             <IoMdInformationCircleOutline />
           </h3>
-          <Link to="/privacy">Sitemap</Link>
           <Link to="/privacy">Privacy Policy</Link>
           <a
             href="https://armanimichael.com"
