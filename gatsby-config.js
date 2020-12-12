@@ -28,6 +28,13 @@ module.exports = {
         path: `${__dirname}/src/posts/`,
       },
     },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `blog`,
+    //     path: `${__dirname}/blog`,
+    //   },
+    // },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -176,6 +183,11 @@ module.exports = {
         ],
       },
     },
-    `gatsby-plugin-netlify-cms`,
+    {
+      resolve: `gatsby-plugin-netlify-cms`,
+      options: {
+        enableIdentityWidget: true,
+      },
+    },
   ],
 };
