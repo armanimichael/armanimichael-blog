@@ -11,6 +11,7 @@ import PostsList from './PostsList/PostsList';
 import PostPreview from './PostPreview/PostPreview';
 import PageButtons from './PageButtons/PageButtons';
 import ThemeButton from './ThemeButton/ThemeButton';
+import CategoriesList from './CategoriesList/CategoriesList';
 
 export {
   Navbar,
@@ -26,4 +27,5 @@ export {
   PostsList,
   PageButtons,
   ThemeButton,
+  CategoriesList,
 };

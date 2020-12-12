@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, PageProps } from 'gatsby';
 
-import { PageButtons, PostsList } from '../components';
+import { PageButtons, PostsList, CategoriesList } from '../components';
 import { Layout } from '../containers';
 
 interface Props extends PageProps {
@@ -16,7 +16,12 @@ const IndexPage: React.FC<Props> = ({
   },
 }) => (
   <Layout>
-    <PostsList edges={edges} />
+    <div className="feed">
+      <div className="posts">
+        <PostsList edges={edges} />
+      </div>
+      <CategoriesList />
+    </div>
     <PageButtons
       previous={totalCount > 10}
       latest={false}

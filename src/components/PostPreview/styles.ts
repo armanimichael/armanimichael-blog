@@ -13,6 +13,7 @@ const PostStyled = styled.div`
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.paragraph.primary + '7f'};
   padding: 2.4rem 10px;
+  margin-right: 12em;
   box-sizing: border-box;
 
   & a {
@@ -36,6 +37,7 @@ const PostStyled = styled.div`
   @media all and (max-width: 800px) {
     width: 100%;
     padding: 1.2rem 10px;
+    margin-right: 0;
   }
 `;
 

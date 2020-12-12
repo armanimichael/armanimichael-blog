@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { PostsList, PageButtons } from '../components';
+import { PostsList, PageButtons, CategoriesList } from '../components';
 import { Layout } from '../containers';
 
 interface Props {
@@ -28,7 +28,12 @@ const BlogFeed: React.FC<Props> = ({
 
   return (
     <Layout>
-      <PostsList edges={edges} />
+      <div className="feed">
+        <div className="posts">
+          <PostsList edges={edges} />
+        </div>
+        <CategoriesList />
+      </div>
       <PageButtons
         previous={pageNumber < Math.ceil(totalCount / MAX_PAGE_POSTS) - 1}
         latest={pathname !== '/'}

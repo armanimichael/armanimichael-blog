@@ -1,5 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
+const fontSize = {
+  small: '20px',
+  medium: '24px',
+  big: '28px',
+  huge: '54px',
+};
+
 const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'Ubuntu', sans-serif;
@@ -25,7 +32,6 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     background:${props => props.theme.backgrounds.primary};
     color: ${props => props.theme.paragraph.primary};
-    overflow-y: auto;
   }
 
   header {
@@ -39,7 +45,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a, p, li, ul, ol, td, th {
-    font-size: 22px;
+    font-size: ${fontSize.small};
     line-height: 1.6em;   
     color: ${props => props.theme.paragraph.primary};
   }
@@ -50,17 +56,17 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    font-size: 60px;
+    font-size: ${fontSize.huge};
     margin-bottom: 20px;
   }
 
   h2 {
-    font-size: 32px;
+    font-size: ${fontSize.big};
     margin: 20px 0;
   }
 
   h3 {
-    font-size: 24px;
+    font-size: ${fontSize.medium};
     margin: 20px 0;
   }
 
@@ -257,6 +263,21 @@ const GlobalStyle = createGlobalStyle`
       margin-right: 6px;
     }
   }
+
+  .feed {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .feed.posts {
+    display: flex;    
+    flex-direction: column;
+    align-items: center;
+  }
   
   @media all and (max-width: 800px) {
     h1 {
@@ -269,7 +290,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h3 {
-      font-size: 24px;
+      font-size: ${fontSize.medium};
       margin: 20px 0 0 0;
     }
 
@@ -302,6 +323,10 @@ const GlobalStyle = createGlobalStyle`
 
     a.edit-on-github {
       margin: 40px 10px 0px 10px;
+    }
+
+    .feed {
+      flex-direction: column;
     }
   }
 `;
