@@ -19,8 +19,14 @@ const lightTheme: DefaultTheme = {
   },
 
   navbar: {
-    background: '',
+    background: '#e8e8e8',
     color: '',
+  },
+
+  footer: {
+    background: '#e8e8e8',
+    borderColor: '#212121',
+    color: '#212121',
   },
 
   backgrounds: {

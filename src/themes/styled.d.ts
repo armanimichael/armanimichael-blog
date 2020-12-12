@@ -17,6 +17,12 @@ declare module 'styled-components' {
       color: string;
     };
 
+    footer: {
+      background: string;
+      borderColor: string;
+      color: string;
+    };
+
     button: {
       primary: string;
       primaryColor: string;

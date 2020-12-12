@@ -12,7 +12,7 @@ const darkTheme: DefaultTheme = {
   },
 
   button: {
-    primary: '#0a4494',
+    primary: '#377cdc',
     primaryColor: '#fffffe',
     secondary: '',
     secondaryColor: '',
@@ -21,6 +21,12 @@ const darkTheme: DefaultTheme = {
   navbar: {
     background: '#090b10',
     color: '',
+  },
+
+  footer: {
+    background: '#090b10',
+    borderColor: '#323232',
+    color: '#ffffffe6',
   },
 
   backgrounds: {
