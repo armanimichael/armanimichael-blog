@@ -10,6 +10,7 @@ import NotFoundImage from './NotFoundImage/NotFoundImage';
 import PostsList from './PostsList/PostsList';
 import PostPreview from './PostPreview/PostPreview';
 import PageButtons from './PageButtons/PageButtons';
+import ThemeButton from './ThemeButton/ThemeButton';
 
 export {
   Navbar,
@@ -24,4 +25,5 @@ export {
   PostPreview,
   PostsList,
   PageButtons,
+  ThemeButton,
 };
