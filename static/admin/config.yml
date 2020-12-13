@@ -1,21 +1,43 @@
 backend:
-  name: github
+  name: test-repo
   repo: armanimichael/armanimichael-blog
-
 media_folder: static/assets
 public_folder: /assets
-
 collections:
   - name: blog
     label: Blog
     folder: src/posts
     create: true
     fields:
-      - { name: title, label: Title }
-      - { name: crawlerTitle, label: Crawler Title }
-      - { name: keywords, label: Keywords }
-      - { name: excerpt, label: Excerpt }
-      - { name: slug, label: Slug }
-      - { name: date, label: date, widget: datetime }
-      - { name: category, label: Category }
-      - { name: body, label: Body, widget: markdown }
+      - name: title
+        label: Title
+      - name: crawlerTitle
+        label: Crawler Title
+      - name: keywords
+        label: Keywords
+      - name: excerpt
+        label: Excerpt
+      - name: slug
+        label: Slug
+      - name: date
+        label: date
+        widget: datetime
+      - name: category
+        label: Category
+        widget: select
+        options:
+          - React
+          - JavaScript
+          - NodeJS
+          - CSS
+          - Web Dev
+          - MonoGame
+          - PHP
+          - Problem Solving
+          - Python
+          - CS
+          - TypeScript
+          - General
+      - name: body
+        label: Body
+        widget: markdown
