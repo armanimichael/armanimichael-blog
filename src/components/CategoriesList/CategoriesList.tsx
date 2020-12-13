@@ -10,7 +10,10 @@ const CategoriesList: React.FC = () => (
       <h2>Categories</h2>
       {useCategories().map(category => (
         <Category
-          to={`/category/${category.name.toLowerCase()}`}
+          to={`/category/${category.name
+            .toLowerCase()
+            .replace(/ /g, '-')
+            .trim()}`}
           key={category.id}
         >
           {category.name}
