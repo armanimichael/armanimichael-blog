@@ -273,8 +273,8 @@ const GlobalStyle = createGlobalStyle`
     align-items: flex-start;
   }
 
-  .feed.posts {
-    display: flex;    
+  .feed > .posts {
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
@@ -327,6 +327,10 @@ const GlobalStyle = createGlobalStyle`
 
     .feed {
       flex-direction: column;
+    }
+
+    .feed > .posts {
+      width: 100%;
     }
   }
 `;

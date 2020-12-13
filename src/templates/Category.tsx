@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { SEO, PostsList } from '../components';
+import { SEO, PostsList, CategoriesList } from '../components';
 import { Layout } from '../containers';
 
 interface Props {
@@ -26,12 +26,16 @@ const Category: React.FC<Props> = ({
   const { category } = edges[0].node.frontmatter;
   const description = nodes[0] && nodes[0].description;
 
-  // TODO ADD Image
   return (
     <Layout SEOComponent={<SEO title={category} description={description} />}>
       <h1 style={{ textAlign: 'center' }}>Category - {category}</h1>
       <hr className="section-heading-divider" />
-      <PostsList edges={edges} />
+      <div className="feed">
+        <div className="posts">
+          <PostsList edges={edges} />
+        </div>
+        <CategoriesList />
+      </div>
     </Layout>
   );
 };

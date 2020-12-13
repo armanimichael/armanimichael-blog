@@ -7,14 +7,18 @@ interface CategoryProps {
 }
 
 const PostStyled = styled.div`
-  width: 60%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.paragraph.primary + '7f'};
   padding: 2.4rem 10px;
-  margin-right: 12em;
+  margin-right: 8em;
   box-sizing: border-box;
+
+  &:last-child {
+    border-bottom: none;
+  }
 
   & a {
     transition: opacity 0.2s ease;
