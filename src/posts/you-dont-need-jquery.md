@@ -7,7 +7,6 @@ slug: dont-need-jquery
 date: 2020-12-15T21:03:05.761Z
 category: JavaScript
 ---
-
 ## What's with JQuery?
 
 **JQuery** is probably one of the most used [JavaScript](/category/javascript) libraries around. It's been around for quite some time, dating back to 2006.
@@ -22,9 +21,9 @@ For instance, if you're using [ReactJS](/category/reactjs), you should not be us
 
 ## JavaScript vs JQuery - some examples
 
-Let's write, in practice, what's you can do with JavaScript without the need for JQuery.
+Let's see, in practice, what you can do with JavaScript without the need for JQuery.
 
-First, let's take a look at how to **select HTML elements**. In the snippets below, you will always see a JQuery example followed by a JavaScript one. Let's also suppose we want to work with a HTML elements with `class = "example"`.
+First, let's take a look at how to **select HTML elements**. In the snippets below, you will always see a JQuery example followed by a JavaScript one. Let's also suppose we want to work with a HTML element with `class = "example"`.
 
 I will not cover all methods with JS, as you could also retrive an element(s) by its tag name for example. You can find more about that on [here, for example](https://developer.mozilla.org/en-US/docs/Web/javascript).
 
