@@ -17,7 +17,7 @@ Don't get me wrong now. JQuery is a great library, and I personally use it at wo
 
 Every dependency on any project of yours has its impact on **performances,** **loading times, and even security**. Choosing the best solution for you will boost your productivity.
 
-For instance, if you're using [ReactJS](/category/reactjs), you should not be using JQuery, as you can perform the needed tasks just with JavaScript or React itself.
+For instance, if you're using [ReactJS](/category/react), you should not be using JQuery, as you can perform the needed tasks just with JavaScript or React itself.
 
 ## JavaScript vs JQuery - some examples
 
