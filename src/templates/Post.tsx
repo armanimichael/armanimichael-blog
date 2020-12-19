@@ -22,7 +22,7 @@ const Post: React.FC<Props> = ({ data: { mdx } }) => (
             ? mdx.frontmatter.crawlerTitle
             : mdx.frontmatter.title
         }
-        description={mdx.frontmatter.description}
+        description={mdx.frontmatter.description || mdx.frontmatter.excerpt}
         keywords={mdx.frontmatter.keywords}
         image={mdx.frontmatter.category.toLowerCase() + '.jpg'}
       />

@@ -17,6 +17,9 @@ collections:
         label: Keywords
       - name: excerpt
         label: Excerpt
+      - name: description
+        label: Description
+        required: false
       - name: slug
         label: Slug
       - name: date

@@ -5,7 +5,7 @@ module.exports = {
     siteUrl: 'https://blog.armanimichael.com',
     description:
       'Software Developer based in Italy. Read more about programming and Web Development on my Blog - I mostly write about Web Development and ReactJS, but you can find other topics too.',
-    author: '',
+    author: 'Michael armani',
   },
   plugins: [
     'gatsby-plugin-offline',
@@ -187,6 +187,59 @@ module.exports = {
       resolve: `gatsby-plugin-netlify-cms`,
       options: {
         enableIdentityWidget: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed-mdx`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.edges.map(edge => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  title: edge.node.frontmatter.title,
+                  description: edge.node.excerpt,
+                  date: edge.node.frontmatter.date,
+                  url: `${site.siteMetadata.siteUrl}/${edge.node.frontmatter.slug}`,
+                  guid: `${site.siteMetadata.siteUrl}/${edge.node.frontmatter.slug}`,
+                });
+              });
+            },
+            query: `
+              {
+                allMdx(
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                ) {
+                  edges {
+                    node {
+                      excerpt
+                      html
+                      frontmatter {
+                        title
+                        date
+                        slug
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/rss.xml',
+            title: "Mike's Blog RSS Feed",
+          },
+        ],
       },
     },
   ],
