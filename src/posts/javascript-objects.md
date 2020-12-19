@@ -84,4 +84,4 @@ animal.walk();
 
 Creating methods only requires you to assign a function to a key, you can later call it by accessing the property and adding the parenthesis.
 
-By using the this keywords you can also access the Object's properties from within the method. Be aware that you can also use arrow functions, however, `this` will NOT be the object but the outer scope (where the object lives).
+By using the `this` keywords you can also access the Object's properties from within the method. Be aware that you can also use arrow functions, however, `this` will NOT be the object but the outer scope (where the object lives).
