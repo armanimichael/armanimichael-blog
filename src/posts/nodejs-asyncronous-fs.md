@@ -1,13 +1,14 @@
 ---
-title: NodeJS Asyncronous FS
-crawlerTitle: NodeJS Asyncronous FS
+title: NodeJS Asynchronous FS
+crawlerTitle: NodeJS Asynchronous FS
 keywords: nodejs, server, backend dev, web dev, javascript, javascript async, file system
-excerpt: Asyncronous Read/ Write FS Operations.
+excerpt: Asynchronous Read/ Write FS Operations.
 slug: nodejs-async-fs
 date: 2020-12-17T21:01:59.142Z
 category: NodeJS
 ---
-## Asyncronous Functions
+
+## Asynchronous Functions
 
 In a previous post about [JavaScript](/category/javascript), I talked about [how to use Promises](/javascript-promises/). Promises are an important part of async programming, they can be used to work with `async` functions and you can clean up your code by using them proficiently.
 
@@ -29,7 +30,6 @@ fs.readFile('./package.json', 'utf-8')
   .catch(err => {
     console.log(err);
   });
-
 ```
 
 In the example above I'm using **Promises** to read the `package.json` file. The first argument to the readFile function is the file, while the second one is the **character encoding**.
@@ -71,14 +71,13 @@ fs.writeFile('./test.txt', 'Some data')
   .catch(err => {
     console.log(err);
   });
-
 ```
 
-As you can see, I called the append function only after the first write operation is done. That's because I want to ensure to write the strings in the given order. 
+As you can see, I called the append function only after the first write operation is done. That's because I want to ensure to write the strings in the given order.
 
 ## Where to go from here
 
-This is merely an introduction on working asynchronously with the fs and Node in general. In the future, starting from this simple posts, I will progressively add more complexity. 
+This is merely an introduction on working asynchronously with the fs and Node in general. In the future, starting from this simple posts, I will progressively add more complexity.
 
 For now let's stick to the basics, let's avoid overdoing. If you want to learn more about this module, the [official NodeJS docs](https://nodejs.org/api/fs.html) can help you out.
 
