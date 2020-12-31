@@ -3,7 +3,24 @@ import { Link } from 'gatsby';
 
 import { useNavbarlinks } from '../queries/useNavbarLinks';
 
-export const generateLinks = (): any => {
+const validateLink = (link: string): string => {
+  let parsedLink = link.toLowerCase();
+
+  // Check for Begin and End Slashes
+  parsedLink = parsedLink[0] !== '/' ? `/${parsedLink}` : parsedLink;
+  if (parsedLink.lastIndexOf('/') === -1) {
+    parsedLink = `${parsedLink}/`;
+  }
+
+  // Check for url validity
+  const urlMatch = new RegExp(/\/[a-z0-9|-]+\//g);
+  const validUrl = urlMatch.test(parsedLink);
+
+  // Return link if valid or fix and return
+  return validUrl ? parsedLink : parsedLink.replace(/[^a-z0-9|\/|-]+/g, '');
+};
+
+const generateLinks = (): any => {
   const links = useNavbarlinks();
 
   return links.map(({ path, name, id }) => {
@@ -29,3 +46,5 @@ export const generateLinks = (): any => {
     );
   });
 };
+
+export { validateLink, generateLinks };

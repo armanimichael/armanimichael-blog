@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { PostPreview } from '../';
+import { validateLink } from '../../utils/generateLinks';
 
 interface Props {
   edges: any;
@@ -25,12 +26,13 @@ const PostsList: React.FC<Props> = ({ edges }) => {
   edges.forEach((post: PostData) => {
     const { id } = post.node;
     const { title, slug, date, category, excerpt } = post.node.frontmatter;
+    const parsedSlug = validateLink(slug);
 
     posts.push(
       <PostPreview
         key={id}
         title={title}
-        path={slug}
+        path={parsedSlug}
         date={date}
         category={category}
         excerpt={excerpt}
