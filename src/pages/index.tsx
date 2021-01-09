@@ -16,6 +16,8 @@ const IndexPage: React.FC<Props> = ({
   },
 }) => (
   <Layout>
+    <h1 style={{ textAlign: 'center' }}>Mike&apos;s Blog</h1>
+    <hr className="section-heading-divider" />
     <div className="feed">
       <div className="posts">
         <PostsList edges={edges} />

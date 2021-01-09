@@ -28,6 +28,8 @@ const BlogFeed: React.FC<Props> = ({
 
   return (
     <Layout>
+      <h1 style={{ textAlign: 'center' }}>Blog - Page {pageNumber}</h1>
+      <hr className="section-heading-divider" />
       <div className="feed">
         <div className="posts">
           <PostsList edges={edges} />

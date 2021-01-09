@@ -56,8 +56,9 @@ const Category = styled(Link)<CategoryProps>`
     color: ${props => props.color};
     border-radius: 10px;
     font-size: 18px;
-    padding: 0 10px;
+    padding: 0 1em;
     background: ${props => props.background};
+    font-weight: bold;
   }
 
   @media all and (pointer: fine) {
