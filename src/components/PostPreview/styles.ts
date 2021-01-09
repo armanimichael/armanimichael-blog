@@ -7,7 +7,7 @@ interface CategoryProps {
 }
 
 const PostStyled = styled.div`
-  width: 80%;
+  width: 44vw;
   display: flex;
   flex-direction: column;
   align-items: center;
